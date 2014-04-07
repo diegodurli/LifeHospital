@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @clinical_outcome.description %>
+</p>
+
+<p>
+  <strong>Observations:</strong>
+  <%= @clinical_outcome.observations %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @clinical_outcome.status %>
+</p>
+
+<p>
+  <strong>Medicalrecord:</strong>
+  <%= @clinical_outcome.medicalrecord %>
+</p>
+
+<%= link_to 'Edit', edit_clinical_outcome_path(@clinical_outcome) %> |
+<%= link_to 'Back', clinical_outcomes_path %>

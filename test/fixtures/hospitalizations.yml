@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  location: MyString
+  procedures: MyString
+  treatments: MyString
+  person_id: 
+  medicalrecord_id: 
+
+two:
+  location: MyString
+  procedures: MyString
+  treatments: MyString
+  person_id: 
+  medicalrecord_id: 

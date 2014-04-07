@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  quantity: 1
+  unit: MyString
+  diet: MyString
+  calories: 9.99
+
+two:
+  quantity: 1
+  unit: MyString
+  diet: MyString
+  calories: 9.99

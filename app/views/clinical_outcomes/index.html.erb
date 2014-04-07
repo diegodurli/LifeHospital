@@ -1,0 +1,33 @@
+<h1>Listing clinical_outcomes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Observations</th>
+      <th>Status</th>
+      <th>Medicalrecord</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @clinical_outcomes.each do |clinical_outcome| %>
+      <tr>
+        <td><%= clinical_outcome.description %></td>
+        <td><%= clinical_outcome.observations %></td>
+        <td><%= clinical_outcome.status %></td>
+        <td><%= clinical_outcome.medicalrecord %></td>
+        <td><%= link_to 'Show', clinical_outcome %></td>
+        <td><%= link_to 'Edit', edit_clinical_outcome_path(clinical_outcome) %></td>
+        <td><%= link_to 'Destroy', clinical_outcome, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Clinical outcome', new_clinical_outcome_path %>

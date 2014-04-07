@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  serum_id: 
+  hospitalization_id: 
+
+two:
+  serum_id: 
+  hospitalization_id: 

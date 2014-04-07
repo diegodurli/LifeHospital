@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyText
+  dosage: 9.99
+  inventory_min: 1
+  medicalrecord_id: 
+
+two:
+  description: MyText
+  dosage: 9.99
+  inventory_min: 1
+  medicalrecord_id: 

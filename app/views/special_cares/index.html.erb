@@ -1,0 +1,31 @@
+<h1>Listing special_cares</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Desactivation</th>
+      <th>Hospitalization</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @special_cares.each do |special_care| %>
+      <tr>
+        <td><%= special_care.description %></td>
+        <td><%= special_care.desactivation %></td>
+        <td><%= special_care.hospitalization %></td>
+        <td><%= link_to 'Show', special_care %></td>
+        <td><%= link_to 'Edit', edit_special_care_path(special_care) %></td>
+        <td><%= link_to 'Destroy', special_care, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Special care', new_special_care_path %>

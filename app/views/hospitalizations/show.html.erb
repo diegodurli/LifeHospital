@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @hospitalization.location %>
+</p>
+
+<p>
+  <strong>Procedures:</strong>
+  <%= @hospitalization.procedures %>
+</p>
+
+<p>
+  <strong>Treatments:</strong>
+  <%= @hospitalization.treatments %>
+</p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @hospitalization.person %>
+</p>
+
+<p>
+  <strong>Medicalrecord:</strong>
+  <%= @hospitalization.medicalrecord %>
+</p>
+
+<%= link_to 'Edit', edit_hospitalization_path(@hospitalization) %> |
+<%= link_to 'Back', hospitalizations_path %>

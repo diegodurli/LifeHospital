@@ -1,0 +1,29 @@
+<h1>Listing medical_records</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Historic</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @medical_records.each do |medical_record| %>
+      <tr>
+        <td><%= medical_record.description %></td>
+        <td><%= medical_record.historic %></td>
+        <td><%= link_to 'Show', medical_record %></td>
+        <td><%= link_to 'Edit', edit_medical_record_path(medical_record) %></td>
+        <td><%= link_to 'Destroy', medical_record, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Medical record', new_medical_record_path %>

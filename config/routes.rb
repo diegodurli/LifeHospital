@@ -1,4 +1,30 @@
 LifeHospital::Application.routes.draw do
+  resources :inventory_movements
+
+  resources :inventories
+
+  resources :medicaments
+
+  resources :clinical_outcomes
+
+  resources :exams
+
+  resources :procedures
+
+  resources :prescriptions
+
+  resources :diets
+
+  resources :special_cares
+
+  resources :serums
+
+  resources :hospitalizations
+
+  resources :medical_records
+
+  resources :people
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
