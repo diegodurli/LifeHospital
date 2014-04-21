@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140407044110) do
+ActiveRecord::Schema.define(version: 20140421205403) do
 
   create_table "clinical_outcomes", force: true do |t|
     t.text     "description"
@@ -59,14 +59,14 @@ ActiveRecord::Schema.define(version: 20140407044110) do
     t.text     "location"
     t.text     "procedures"
     t.text     "treatments"
-    t.integer  "person_id"
+    t.integer  "user_id"
     t.integer  "medicalrecord_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "hospitalizations", ["medicalrecord_id"], name: "index_hospitalizations_on_medicalrecord_id"
-  add_index "hospitalizations", ["person_id"], name: "index_hospitalizations_on_person_id"
+  add_index "hospitalizations", ["user_id"], name: "index_hospitalizations_on_user_id"
 
   create_table "inventories", force: true do |t|
     t.decimal  "total_value"
@@ -166,5 +166,20 @@ ActiveRecord::Schema.define(version: 20140407044110) do
   end
 
   add_index "special_cares", ["hospitalization_id"], name: "index_special_cares_on_hospitalization_id"
+
+  create_table "users", force: true do |t|
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "name"
+    t.integer  "document"
+    t.string   "phone"
+    t.string   "address"
+    t.string   "contact"
+    t.string   "user_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email"
 
 end

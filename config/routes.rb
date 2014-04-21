@@ -1,4 +1,13 @@
 LifeHospital::Application.routes.draw do
+  root 'pages#index'
+
+  get "/login", to: "sessions#new"
+  post "/login", to: "sessions#create"
+  get "/logout", to: "sessions#destroy"
+
+  get '/signup', to: 'users#new'
+  resources :users
+
   resources :inventory_movements
 
   resources :inventories
@@ -22,8 +31,6 @@ LifeHospital::Application.routes.draw do
   resources :hospitalizations
 
   resources :medical_records
-
-  resources :people
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

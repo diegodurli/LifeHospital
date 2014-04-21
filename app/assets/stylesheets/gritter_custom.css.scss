@@ -1,0 +1,29 @@
+@mixin notification() {
+  position: fixed;
+  top: 2%;
+  right: 1%;
+  width: 98%;
+  z-index: 9999;
+
+  background: #FFFFFF;
+  -moz-box-shadow:    0px 2px 4px 0px rgba(0,0,0,0.50);
+  box-shadow:         0px 2px 4px 0px rgba(0,0,0,0.50);
+
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.error_notification {
+  @include notification();
+  background: #e74c3c;
+}
+
+.success_notification {
+  @include notification();
+  background: #2ecc71;
+}
+
+.info_notification {
+  @include notification();
+  background: #3498db;
+}
