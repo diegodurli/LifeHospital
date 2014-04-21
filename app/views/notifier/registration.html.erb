@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width"/>
+  <link href='http://fonts.googleapis.com/css?family=Lato:700' rel='stylesheet' type='text/css'>
+<style>
+  #content {
+  position: relative;
+  width: 500px;
+  height: 700px;
+  background: #FFFFFF;
+  -moz-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+}
+#content #greendiv {
+  position: absolute;
+  width: 500px;
+  height: 554px;
+  background: #1ABC9C;
+  top: 146px;
+}
+#content #image {
+  position: absolute;
+  left: 160px;
+  top: 60px;
+}
+#content #body {
+  position: absolute;
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
+  color: #FFFFFF;
+  line-height: 22px;
+  left: 74px;
+  top: 305px;
+}
+</style>
+</head>
+<body>
+  <p>
+    <%= @greeting %> <%= @name %>,<br><br>
+
+    Thank you for being part of Life Hospital.
+  </p>
+  <br><br>
+  <p>
+    Sincerely,<br>
+    Life Hospital Team
+  </p>
+</body>
+</html>
