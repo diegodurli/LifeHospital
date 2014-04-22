@@ -18,5 +18,14 @@ class ApplicationController < ActionController::Base
 
   	gflash type.to_sym => config
   end
-  helper_method :current_user, :notification
+
+  def get_error_classes(object)
+    if object && object.errors.any?
+      return 'animated shake'
+    end
+
+    ''
+  end
+
+  helper_method :current_user, :notification, :get_error_classes
 end

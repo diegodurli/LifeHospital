@@ -7,7 +7,8 @@ class SessionsController < ApplicationController
 
   	if user && user.authenticate(params[:password])
   		session[:user_id] = user.id
-  		notification 'success', {value: 'User logged in successfully.'}
+  		notification 'success', {value: "Welcome, #{user.name}!"}
+
   		redirect_to root_url
   	else
   		notification 'error', {value: 'Please, check your credentials.'}
@@ -17,7 +18,7 @@ class SessionsController < ApplicationController
 
   def destroy
   	session[:user_id] = nil
-  	notification 'info', {value: 'User logged out successfully.'}
+  	notification 'info', {value: 'You logged out!'}
   	redirect_to root_url
   end
 end

@@ -28,10 +28,16 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        Notifier.registration(@user.name, @user.email).deliver
+        notification 'success', {value: "Welcome, #{@user.name}!"}
+
+        format.html { redirect_to @user }
         format.json { render action: 'show', status: :created, location: @user }
       else
-        format.html { render action: 'new' }
+        format.html {
+          notification 'error', {value: @user.errors.full_messages.join('<br>')}
+          render 'new'
+        }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
