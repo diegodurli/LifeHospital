@@ -31,8 +31,8 @@ class UsersController < ApplicationController
         Notifier.registration(@user.name, @user.email).deliver
         notification 'success', {value: "Welcome, #{@user.name}!"}
 
-        format.html { redirect_to @user }
-        format.json { redirect_to root_url }
+        format.html { redirect_to root_url }
+        format.json { redirect_to @user }
       else
         format.html {
           notification 'error', {value: @user.errors.full_messages.join('<br>')}
