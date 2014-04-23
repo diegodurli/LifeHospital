@@ -1,41 +1,16 @@
-<%= form_for @user, html: {class: get_error_classes(@user)} do |f| %>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
+<%= form_for @user, html: {class: "form-signin #{get_error_classes(@user)}", role: 'form'} do |f| %>
+  <div>
+    <%= f.email_field :email, class: 'form-control', placeholder: 'Email', autofocus: true, required: true %>
+    <%= f.password_field :password, class: 'form-control', placeholder: 'Password', required: true %>
+    <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Password Confirmation', required: true %>
+    <%= f.text_field :name, class: 'form-control', placeholder: 'Name', required: true %>
+    <%= f.number_field :document, class: 'form-control', placeholder: 'Document', required: true %>
+    <%= f.text_field :phone, class: 'form-control', placeholder: 'Phone' %>
+    <%= f.text_field :address, class: 'form-control', placeholder: 'Address' %>
+    <%= f.text_field :contact, class: 'form-control', placeholder: 'Contact' %>
+    <%= f.text_field :user_type, class: 'form-control', placeholder: 'User Type', required: true %>
   </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :document %><br>
-    <%= f.number_field :document %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br>
-    <%= f.text_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :contact %><br>
-    <%= f.text_field :contact %>
-  </div>
-  <div class="field">
-    <%= f.label :user_type %><br>
-    <%= f.text_field :user_type %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div>
+    <%= f.submit 'Create User', class: 'btn btn-lg btn-primary btn-block' %>
   </div>
 <% end %>
