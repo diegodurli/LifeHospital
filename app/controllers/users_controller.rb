@@ -32,7 +32,7 @@ class UsersController < ApplicationController
         notification 'success', {value: "Welcome, #{@user.name}!"}
 
         format.html { redirect_to @user }
-        format.json { render action: 'show', status: :created, location: @user }
+        format.json { redirect_to root_url }
       else
         format.html {
           notification 'error', {value: @user.errors.full_messages.join('<br>')}
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { redirect_to root_url }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
