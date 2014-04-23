@@ -1,2 +1,73 @@
-<h1>Pages#index</h1>
-<p>Find me in app/views/pages/index.html.erb</p>
+<% if current_user %>
+	<div class="row">
+	  <div class="col-xs-12 col-md-3">
+	    <a href="<%= users_path %>" class="thumbnail">
+	      <%= fa_icon "user 4x", text: 'People' %>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-3">
+	    <a href="<%= diets_path %>" class="thumbnail">
+	      <%= fa_icon "cutlery 4x", text: 'Diet' %>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-3">
+	    <a href="<%= clinical_outcomes_path %>" class="thumbnail">
+	      <%= fa_icon "user-md 4x", text: 'Clinical Outcomes' %>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-3">
+	    <a href="<%= exams_path %>" class="thumbnail">
+	      <%= fa_icon "stethoscope 4x", text: 'Exams' %>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-3">
+	    <a href="<%= hospitalizations_path %>" class="thumbnail">
+	      <%= fa_icon "hospital-o 4x", text: 'Hospitalizations' %>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-3">
+	    <a href="<%= inventories_path %>" class="thumbnail">
+	      <%= fa_icon "briefcase 4x", text: 'Inventories' %>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-3">
+	    <a href="<%= inventory_movements_path %>" class="thumbnail">
+	      <%= fa_icon "briefcase 4x", text: 'Inventory Movements' %>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-3">
+	    <a href="<%= medical_records_path %>" class="thumbnail">
+	      <%= fa_icon "folder-open 4x", text: 'Medical Records' %>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-3">
+	    <a href="<%= medicaments_path %>" class="thumbnail">
+	      <%= fa_icon "medkit 4x", text: 'Medicaments' %>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-3">
+	    <a href="<%= prescriptions_path %>" class="thumbnail">
+	      <%= fa_icon "edit 4x", text: 'Prescriptions' %>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-3">
+	    <a href="<%= procedures_path %>" class="thumbnail">
+	      <%= fa_icon "plus-square 4x", text: 'Procedures' %>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-3">
+	    <a href="<%= serums_path %>" class="thumbnail">
+	      <%= fa_icon "flask 4x", text: 'Serums' %>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-3">
+	    <a href="<%= special_cares_path %>" class="thumbnail">
+	      <%= fa_icon "warning 4x", text: 'Special Cares' %>
+	    </a>
+	  </div>
+	</div>
+<% else %>
+	<div class="jumbotron">
+	  <h1>Welcome to Life Hospital!</h1>
+	</div>
+<% end %>
