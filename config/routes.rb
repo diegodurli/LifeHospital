@@ -6,7 +6,6 @@ LifeHospital::Application.routes.draw do
   get "/logout", to: "sessions#destroy"
 
   get '/signup', to: 'users#new'
-  resources :users
 
   resources :inventory_movements
 
@@ -86,4 +85,6 @@ LifeHospital::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  match '*a', to: "pages#routing_error", via: [:get,:post,:put,:delete,:patch]
 end

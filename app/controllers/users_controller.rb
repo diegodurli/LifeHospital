@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
   end
 
   # GET /users/1
@@ -14,6 +13,10 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
+    if current_user
+      redirect_to root_url
+    end
+
     @user = User.new
   end
 
