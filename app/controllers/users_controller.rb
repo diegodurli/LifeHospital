@@ -28,6 +28,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    Rails.logger.debug "Logging #{@user.document}"
 
     respond_to do |format|
       if @user.save
@@ -80,4 +81,10 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation, :name, :document, :phone, :address, :contact, :user_type)
     end
+
+    def get_options_for_user_type_signup_form
+      [['Doctor','D'],['Nurse','N'],['Receptionist','R']]
+    end
+
+    helper_method :get_options_for_user_type_signup_form
 end

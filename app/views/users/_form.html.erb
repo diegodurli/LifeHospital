@@ -4,11 +4,11 @@
     <%= f.password_field :password, class: 'form-control', placeholder: 'Password', required: true %>
     <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Password Confirmation', required: true %>
     <%= f.text_field :name, class: 'form-control', placeholder: 'Name', required: true %>
-    <%= f.number_field :document, class: 'form-control', placeholder: 'Document', required: true %>
+    <%= f.text_field :document, class: 'form-control', placeholder: 'Document', maxlength: 11, required: true %>
     <%= f.text_field :phone, class: 'form-control', placeholder: 'Phone' %>
     <%= f.text_field :address, class: 'form-control', placeholder: 'Address' %>
     <%= f.text_field :contact, class: 'form-control', placeholder: 'Contact' %>
-    <%= f.text_field :user_type, class: 'form-control', placeholder: 'User Type', required: true %>
+    <%= f.select :user_type, get_options_for_user_type_signup_form(), {selected: 'D'}, {class: 'form-control', required: true} %>
   </div>
   <div>
     <%= f.submit 'Create User', class: 'btn btn-lg btn-primary btn-block' %>
