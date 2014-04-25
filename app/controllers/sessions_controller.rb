@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    @have_errors = false
   	user = User.find_by_email(params[:email])
 
   	if user && user.authenticate(params[:password])
@@ -14,6 +15,7 @@ class SessionsController < ApplicationController
 
   		redirect_to root_url
   	else
+      @have_errors = true
   		notification 'error', {value: 'Please, check your credentials.'}
   		render 'new'
   	end

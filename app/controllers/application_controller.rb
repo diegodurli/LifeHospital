@@ -20,12 +20,8 @@ class ApplicationController < ActionController::Base
   	gflash type.to_sym => config
   end
 
-  def get_error_classes(object)
-    if object && object.errors.any?
-      return 'animated shake'
-    end
-
-    ''
+  def get_error_classes(have_errors)
+    'animated shake' if have_errors
   end
 
   def authenticate
