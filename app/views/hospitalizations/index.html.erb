@@ -1,35 +1,3 @@
-<h1>Listing hospitalizations</h1>
+<h1>Hospitalizations</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Location</th>
-      <th>Procedures</th>
-      <th>Treatments</th>
-      <th>Person</th>
-      <th>Medicalrecord</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @hospitalizations.each do |hospitalization| %>
-      <tr>
-        <td><%= hospitalization.location %></td>
-        <td><%= hospitalization.procedures %></td>
-        <td><%= hospitalization.treatments %></td>
-        <td><%= hospitalization.person %></td>
-        <td><%= hospitalization.medicalrecord %></td>
-        <td><%= link_to 'Show', hospitalization %></td>
-        <td><%= link_to 'Edit', edit_hospitalization_path(hospitalization) %></td>
-        <td><%= link_to 'Destroy', hospitalization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Hospitalization', new_hospitalization_path %>
+<%= render partial: 'partials/list_resource', locals: {records: @hospitalizations} %>

@@ -1,27 +1,3 @@
-<h1>Listing serums</h1>
+<h1>Serums</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @serums.each do |serum| %>
-      <tr>
-        <td><%= serum.description %></td>
-        <td><%= link_to 'Show', serum %></td>
-        <td><%= link_to 'Edit', edit_serum_path(serum) %></td>
-        <td><%= link_to 'Destroy', serum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Serum', new_serum_path %>
+<%= render partial: 'partials/list_resource', locals: {records: @serums} %>

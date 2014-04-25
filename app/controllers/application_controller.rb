@@ -28,5 +28,9 @@ class ApplicationController < ActionController::Base
     redirect_to login_url unless current_user
   end
 
-  helper_method :current_user, :notification, :get_error_classes
+  def get_columns_of(resource)
+    resource.model.column_names - %w{id created_at updated_at}
+  end
+
+  helper_method :current_user, :notification, :get_error_classes, :get_columns_of
 end

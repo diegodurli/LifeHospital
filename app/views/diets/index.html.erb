@@ -1,29 +1,3 @@
-<h1>Listing diets</h1>
+<h1>Diets</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>Hospitalization</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @diets.each do |diet| %>
-      <tr>
-        <td><%= diet.description %></td>
-        <td><%= diet.hospitalization %></td>
-        <td><%= link_to 'Show', diet %></td>
-        <td><%= link_to 'Edit', edit_diet_path(diet) %></td>
-        <td><%= link_to 'Destroy', diet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Diet', new_diet_path %>
+<%= render partial: 'partials/list_resource', locals: {records: @diets} %>

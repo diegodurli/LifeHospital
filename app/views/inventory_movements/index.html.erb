@@ -1,37 +1,3 @@
-<h1>Listing inventory_movements</h1>
+<h1>Inventory Movements</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Inventory</th>
-      <th>Medicament</th>
-      <th>Quantity</th>
-      <th>Unit value</th>
-      <th>Total value</th>
-      <th>Type</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @inventory_movements.each do |inventory_movement| %>
-      <tr>
-        <td><%= inventory_movement.inventory %></td>
-        <td><%= inventory_movement.medicament %></td>
-        <td><%= inventory_movement.quantity %></td>
-        <td><%= inventory_movement.unit_value %></td>
-        <td><%= inventory_movement.total_value %></td>
-        <td><%= inventory_movement.type %></td>
-        <td><%= link_to 'Show', inventory_movement %></td>
-        <td><%= link_to 'Edit', edit_inventory_movement_path(inventory_movement) %></td>
-        <td><%= link_to 'Destroy', inventory_movement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Inventory movement', new_inventory_movement_path %>
+<%= render partial: 'partials/list_resource', locals: {records: @inventory_movements} %>

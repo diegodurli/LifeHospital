@@ -1,29 +1,3 @@
-<h1>Listing inventories</h1>
+<h1>Inventories</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Total value</th>
-      <th>Document</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @inventories.each do |inventory| %>
-      <tr>
-        <td><%= inventory.total_value %></td>
-        <td><%= inventory.document %></td>
-        <td><%= link_to 'Show', inventory %></td>
-        <td><%= link_to 'Edit', edit_inventory_path(inventory) %></td>
-        <td><%= link_to 'Destroy', inventory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Inventory', new_inventory_path %>
+<%= render partial: 'partials/list_resource', locals: {records: @inventories} %>

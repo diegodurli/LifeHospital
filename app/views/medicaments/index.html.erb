@@ -1,33 +1,3 @@
-<h1>Listing medicaments</h1>
+<h1>Medicaments</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>Dosage</th>
-      <th>Inventory min</th>
-      <th>Medicalrecord</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @medicaments.each do |medicament| %>
-      <tr>
-        <td><%= medicament.description %></td>
-        <td><%= medicament.dosage %></td>
-        <td><%= medicament.inventory_min %></td>
-        <td><%= medicament.medicalrecord %></td>
-        <td><%= link_to 'Show', medicament %></td>
-        <td><%= link_to 'Edit', edit_medicament_path(medicament) %></td>
-        <td><%= link_to 'Destroy', medicament, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Medicament', new_medicament_path %>
+<%= render partial: 'partials/list_resource', locals: {records: @medicaments} %>

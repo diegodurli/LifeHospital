@@ -1,35 +1,3 @@
-<h1>Listing exams</h1>
+<h1>Exams</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>Observations</th>
-      <th>Archive</th>
-      <th>Scheduled</th>
-      <th>Medicalrecord</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @exams.each do |exam| %>
-      <tr>
-        <td><%= exam.description %></td>
-        <td><%= exam.observations %></td>
-        <td><%= exam.archive %></td>
-        <td><%= exam.scheduled %></td>
-        <td><%= exam.medicalrecord %></td>
-        <td><%= link_to 'Show', exam %></td>
-        <td><%= link_to 'Edit', edit_exam_path(exam) %></td>
-        <td><%= link_to 'Destroy', exam, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Exam', new_exam_path %>
+<%= render partial: 'partials/list_resource', locals: {records: @exams} %>
