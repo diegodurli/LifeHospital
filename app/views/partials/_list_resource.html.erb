@@ -1,14 +1,22 @@
+<% title = records.table.name.titleize
+   name_singular = records.table.name.singularize %>
+
+<h1><%= title %></h1><br>
+
+<%= render partial: 'partials/modal', locals: {title: title} %>
 <% columns = get_columns_of(records) %>
 
+<div class="row">
+  <%= link_to fa_icon('plus 2x'), send("new_#{name_singular}_path"), class: "btn btn-right", role: 'button', remote: true %>
+</div>
+
 <div class="table-responsive">
-  <table class="table table-hover">
+  <table class="table table-hover table-condensed">
     <thead>
       <tr>
         <% columns.each do |column| %>
           <th><%= column.humanize %></th>
         <% end %>
-        <th></th>
-        <th></th>
         <th></th>
       </tr>
     </thead>
@@ -19,16 +27,12 @@
           <% columns.each do |column| %>
             <td><%= record[column] %></td>
           <% end %>
-          <td><%= link_to 'Show', record %></td>
-          <td><%= link_to 'Edit', send("edit_#{records.table.name.singularize}_path", record) %></td>
-          <td><%= link_to 'Destroy', record, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td class='icons-cell'>
+            <%= link_to fa_icon('edit 2x'), send("edit_#{name_singular}_path", record), remote: true %>
+            <%= link_to fa_icon('trash-o 2x'), record, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <br>
-
-  <p>
-    <a role="button" class="btn btn-primary btn-lg" href="<%= send("new_#{records.table.name.singularize}_path") %>">New</a>
-  </p>
 </div>

@@ -1,64 +1,53 @@
 class InventoriesController < ApplicationController
   before_action :set_inventory, only: [:show, :edit, :update, :destroy]
 
-  # GET /inventories
-  # GET /inventories.json
-  def index
-    @inventories = Inventory.all
+  before_action only: [:show, :destroy, :index] do
+    is_using_modal?(false)
   end
 
-  # GET /inventories/1
-  # GET /inventories/1.json
+  before_action only: [:edit, :update, :create, :new] do
+    is_using_modal?(true)
+  end
+
+  respond_to :html, :json, :js
+
+  def index
+    render partial: 'partials/index', locals: {records: find_all}, layout: 'layouts/application'
+  end
+
   def show
   end
 
-  # GET /inventories/new
   def new
     @inventory = Inventory.new
+    render partial: 'partials/new'
   end
 
-  # GET /inventories/1/edit
   def edit
+    render partial: 'partials/edit'
   end
 
-  # POST /inventories
-  # POST /inventories.json
   def create
     @inventory = Inventory.new(inventory_params)
 
-    respond_to do |format|
-      if @inventory.save
-        format.html { redirect_to @inventory, notice: 'Inventory was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @inventory }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @inventory.errors, status: :unprocessable_entity }
-      end
+    if @inventory.save
+      index_response('created')
+    else
+      action_error_response('new', @inventory)
     end
   end
 
-  # PATCH/PUT /inventories/1
-  # PATCH/PUT /inventories/1.json
   def update
-    respond_to do |format|
-      if @inventory.update(inventory_params)
-        format.html { redirect_to @inventory, notice: 'Inventory was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @inventory.errors, status: :unprocessable_entity }
-      end
+    if @inventory.update(inventory_params)
+      index_response('updated')
+    else
+      action_error_response('edit', @inventory)
     end
   end
 
-  # DELETE /inventories/1
-  # DELETE /inventories/1.json
   def destroy
     @inventory.destroy
-    respond_to do |format|
-      format.html { redirect_to inventories_url }
-      format.json { head :no_content }
-    end
+    index_response('deleted')
   end
 
   private
@@ -70,5 +59,23 @@ class InventoriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def inventory_params
       params.require(:inventory).permit(:total_value, :document)
+    end
+
+    def find_all
+      Inventory.order(:id)
+    end
+
+    def is_using_modal?(value)
+      @using_modal = value
+    end
+
+    def index_response(action)
+      notification 'success', {value: "Inventory was successfully #{action}."}
+      render partial: 'partials/index', locals: {records: find_all}
+    end
+
+    def action_error_response(action,record)
+      notification 'error', {value: record.errors.full_messages.join('<br>')}
+      render partial: "partials/#{action}"
     end
 end

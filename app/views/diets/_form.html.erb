@@ -1,25 +1,11 @@
-<%= form_for(@diet) do |f| %>
-  <% if @diet.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@diet.errors.count, "error") %> prohibited this diet from being saved:</h2>
+<%= render partial: 'partials/notifications' %>
 
-      <ul>
-      <% @diet.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
+<%= form_for @diet, html: get_default_form_html_options(@diet) do |f| %>
+  <div>
+    <%= f.text_field :description, class: 'form-control', placeholder: 'Description', autofocus: true, required: true %>
+    <%= f.text_field :hospitalization_id, class: 'form-control', placeholder: 'Hospitalization', required: true %>
   </div>
-  <div class="field">
-    <%= f.label :hospitalization_id %><br>
-    <%= f.text_field :hospitalization_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div>
+    <%= f.submit action, class: 'btn btn-lg btn-primary btn-block' %>
   </div>
 <% end %>

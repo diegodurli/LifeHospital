@@ -1,10 +1,11 @@
 class ExamsController < ApplicationController
   before_action :set_exam, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json, :js
 
   # GET /exams
   # GET /exams.json
   def index
-    @exams = Exam.all
+    @exams = Exam.page(params[:page])
   end
 
   # GET /exams/1
@@ -28,10 +29,12 @@ class ExamsController < ApplicationController
 
     respond_to do |format|
       if @exam.save
-        format.html { redirect_to @exam, notice: 'Exam was successfully created.' }
+        format.html { redirect_to exams_url, notice: 'Exam was successfully created.' }
+        format.js   { redirect_to exams_url }
         format.json { render action: 'show', status: :created, location: @exam }
       else
         format.html { render action: 'new' }
+        format.js   { redirect_to exams_url }
         format.json { render json: @exam.errors, status: :unprocessable_entity }
       end
     end
@@ -42,10 +45,12 @@ class ExamsController < ApplicationController
   def update
     respond_to do |format|
       if @exam.update(exam_params)
-        format.html { redirect_to @exam, notice: 'Exam was successfully updated.' }
+        format.html { redirect_to exams_url, notice: 'Exam was successfully updated.' }
+        format.js   { redirect_to exams_url }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
+        format.js   { redirect_to exams_url }
         format.json { render json: @exam.errors, status: :unprocessable_entity }
       end
     end

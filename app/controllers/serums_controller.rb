@@ -1,10 +1,11 @@
 class SerumsController < ApplicationController
   before_action :set_serum, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json, :js
 
   # GET /serums
   # GET /serums.json
   def index
-    @serums = Serum.all
+    @serums = Serum.page(params[:page])
   end
 
   # GET /serums/1
@@ -28,10 +29,12 @@ class SerumsController < ApplicationController
 
     respond_to do |format|
       if @serum.save
-        format.html { redirect_to @serum, notice: 'Serum was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @serum }
+        format.html { redirect_to serums_url, notice: 'Serum was successfully created.' }
+        format.js   { redirect_to serums_url }
+        format.json { render action: 'show', status: :created, location: serums_url }
       else
         format.html { render action: 'new' }
+        format.js   { redirect_to serums_url }
         format.json { render json: @serum.errors, status: :unprocessable_entity }
       end
     end
@@ -42,10 +45,12 @@ class SerumsController < ApplicationController
   def update
     respond_to do |format|
       if @serum.update(serum_params)
-        format.html { redirect_to @serum, notice: 'Serum was successfully updated.' }
+        format.html { redirect_to serums_url, notice: 'Serum was successfully updated.' }
+        format.js   { redirect_to serums_url }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
+        format.js   { redirect_to serums_url }
         format.json { render json: @serum.errors, status: :unprocessable_entity }
       end
     end

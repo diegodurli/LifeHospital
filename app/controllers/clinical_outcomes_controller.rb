@@ -4,7 +4,7 @@ class ClinicalOutcomesController < ApplicationController
   # GET /clinical_outcomes
   # GET /clinical_outcomes.json
   def index
-    @clinical_outcomes = ClinicalOutcome.all
+    @clinical_outcomes = ClinicalOutcome.page(params[:page])
   end
 
   # GET /clinical_outcomes/1

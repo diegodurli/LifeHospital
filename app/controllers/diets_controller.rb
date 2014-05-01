@@ -1,10 +1,11 @@
 class DietsController < ApplicationController
   before_action :set_diet, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json, :js
 
   # GET /diets
   # GET /diets.json
   def index
-    @diets = Diet.all
+    @diets = Diet.page(params[:page])
   end
 
   # GET /diets/1
@@ -28,10 +29,12 @@ class DietsController < ApplicationController
 
     respond_to do |format|
       if @diet.save
-        format.html { redirect_to @diet, notice: 'Diet was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @diet }
+        format.html { redirect_to diets_url, notice: 'Diet was successfully created.' }
+        format.js   { redirect_to diets_url }
+        format.json { render action: 'show', status: :created, location: diets_url }
       else
         format.html { render action: 'new' }
+        format.js   { redirect_to diets_url }
         format.json { render json: @diet.errors, status: :unprocessable_entity }
       end
     end
@@ -42,10 +45,12 @@ class DietsController < ApplicationController
   def update
     respond_to do |format|
       if @diet.update(diet_params)
-        format.html { redirect_to @diet, notice: 'Diet was successfully updated.' }
+        format.html { redirect_to diets_url, notice: 'Diet was successfully updated.' }
+        format.js   { redirect_to diets_url }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
+        format.js   { redirect_to diets_url }
         format.json { render json: @diet.errors, status: :unprocessable_entity }
       end
     end

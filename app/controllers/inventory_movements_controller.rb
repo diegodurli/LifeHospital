@@ -1,10 +1,11 @@
 class InventoryMovementsController < ApplicationController
   before_action :set_inventory_movement, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json, :js
 
   # GET /inventory_movements
   # GET /inventory_movements.json
   def index
-    @inventory_movements = InventoryMovement.all
+    @inventory_movements = InventoryMovement.page(params[:page])
   end
 
   # GET /inventory_movements/1
@@ -28,10 +29,12 @@ class InventoryMovementsController < ApplicationController
 
     respond_to do |format|
       if @inventory_movement.save
-        format.html { redirect_to @inventory_movement, notice: 'Inventory movement was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @inventory_movement }
+        format.html { redirect_to inventory_movements_url, notice: 'Inventory movement was successfully created.' }
+        format.js   { redirect_to inventory_movements_url }
+        format.json { render action: 'show', status: :created, location: inventory_movements_url }
       else
         format.html { render action: 'new' }
+        format.js   { redirect_to inventory_movements_url }
         format.json { render json: @inventory_movement.errors, status: :unprocessable_entity }
       end
     end
@@ -42,10 +45,12 @@ class InventoryMovementsController < ApplicationController
   def update
     respond_to do |format|
       if @inventory_movement.update(inventory_movement_params)
-        format.html { redirect_to @inventory_movement, notice: 'Inventory movement was successfully updated.' }
+        format.html { redirect_to inventory_movements_url, notice: 'Inventory movement was successfully updated.' }
+        format.js   { redirect_to inventory_movements_url }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
+        format.js   { redirect_to inventory_movements_url }
         format.json { render json: @inventory_movement.errors, status: :unprocessable_entity }
       end
     end

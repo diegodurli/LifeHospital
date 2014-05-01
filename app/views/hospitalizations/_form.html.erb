@@ -1,37 +1,14 @@
-<%= form_for(@hospitalization) do |f| %>
-  <% if @hospitalization.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@hospitalization.errors.count, "error") %> prohibited this hospitalization from being saved:</h2>
+<%= render partial: 'partials/notifications' %>
 
-      <ul>
-      <% @hospitalization.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :location %><br>
-    <%= f.text_field :location %>
+<%= form_for @hospitalization, html: get_default_form_html_options(@diet) do |f| %>
+  <div>
+    <%= f.text_field :location, class: 'form-control', placeholder: 'Location', autofocus: true, required: true %>
+    <%= f.text_field :procedures, class: 'form-control', placeholder: 'Procedures', required: true %>
+    <%= f.text_field :treatments, class: 'form-control', placeholder: 'Treatments', required: true %>
+    <%= f.text_field :user_id, class: 'form-control', placeholder: 'User', required: true %>
+    <%= f.text_field :medicalrecord_id, class: 'form-control', placeholder: 'Medical Record', required: true %>
   </div>
-  <div class="field">
-    <%= f.label :procedures %><br>
-    <%= f.text_field :procedures %>
-  </div>
-  <div class="field">
-    <%= f.label :treatments %><br>
-    <%= f.text_field :treatments %>
-  </div>
-  <div class="field">
-    <%= f.label :person_id %><br>
-    <%= f.text_field :person_id %>
-  </div>
-  <div class="field">
-    <%= f.label :medicalrecord_id %><br>
-    <%= f.text_field :medicalrecord_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div>
+    <%= f.submit action, class: 'btn btn-lg btn-primary btn-block' %>
   </div>
 <% end %>

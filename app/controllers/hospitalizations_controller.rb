@@ -1,10 +1,11 @@
 class HospitalizationsController < ApplicationController
   before_action :set_hospitalization, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json, :js
 
   # GET /hospitalizations
   # GET /hospitalizations.json
   def index
-    @hospitalizations = Hospitalization.all
+    @hospitalizations = Hospitalization.page(params[:page])
   end
 
   # GET /hospitalizations/1
@@ -28,10 +29,12 @@ class HospitalizationsController < ApplicationController
 
     respond_to do |format|
       if @hospitalization.save
-        format.html { redirect_to @hospitalization, notice: 'Hospitalization was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @hospitalization }
+        format.html { redirect_to hospitalizations_url, notice: 'Hospitalization was successfully created.' }
+        format.js   { redirect_to hospitalizations_url }
+        format.json { render action: 'show', status: :created, location: hospitalizations_url }
       else
         format.html { render action: 'new' }
+        format.js   { redirect_to hospitalizations_url }
         format.json { render json: @hospitalization.errors, status: :unprocessable_entity }
       end
     end
@@ -42,10 +45,12 @@ class HospitalizationsController < ApplicationController
   def update
     respond_to do |format|
       if @hospitalization.update(hospitalization_params)
-        format.html { redirect_to @hospitalization, notice: 'Hospitalization was successfully updated.' }
+        format.html { redirect_to hospitalizations_url, notice: 'Hospitalization was successfully updated.' }
+        format.js   { redirect_to hospitalizations_url }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
+        format.js   { redirect_to hospitalizations_url }
         format.json { render json: @hospitalization.errors, status: :unprocessable_entity }
       end
     end
@@ -69,6 +74,6 @@ class HospitalizationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hospitalization_params
-      params.require(:hospitalization).permit(:location, :procedures, :treatments, :person_id, :medicalrecord_id)
+      params.require(:hospitalization).permit(:location, :procedures, :treatments, :user_id, :medicalrecord_id)
     end
 end

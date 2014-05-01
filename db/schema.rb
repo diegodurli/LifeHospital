@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140421205403) do
+ActiveRecord::Schema.define(version: 20140501172530) do
 
   create_table "clinical_outcomes", force: true do |t|
     t.text     "description"
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20140421205403) do
     t.integer  "quantity"
     t.decimal  "unit_value"
     t.decimal  "total_value"
-    t.string   "type"
+    t.string   "movement_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -109,17 +109,6 @@ ActiveRecord::Schema.define(version: 20140421205403) do
   end
 
   add_index "medicaments", ["medicalrecord_id"], name: "index_medicaments_on_medicalrecord_id"
-
-  create_table "people", force: true do |t|
-    t.string   "name"
-    t.integer  "document"
-    t.string   "phone"
-    t.string   "address"
-    t.string   "contact"
-    t.string   "type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "prescriptions", force: true do |t|
     t.integer  "quantity"

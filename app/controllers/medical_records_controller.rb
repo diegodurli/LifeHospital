@@ -1,10 +1,11 @@
 class MedicalRecordsController < ApplicationController
   before_action :set_medical_record, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json, :js
 
   # GET /medical_records
   # GET /medical_records.json
   def index
-    @medical_records = MedicalRecord.all
+    @medical_records = MedicalRecord.page(params[:page])
   end
 
   # GET /medical_records/1
@@ -28,10 +29,12 @@ class MedicalRecordsController < ApplicationController
 
     respond_to do |format|
       if @medical_record.save
-        format.html { redirect_to @medical_record, notice: 'Medical record was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @medical_record }
+        format.html { redirect_to medical_records_url, notice: 'Medical record was successfully created.' }
+        format.js   { redirect_to medical_records_url }
+        format.json { render action: 'show', status: :created, location: medical_records_url }
       else
         format.html { render action: 'new' }
+        format.js   { redirect_to medical_records_url }
         format.json { render json: @medical_record.errors, status: :unprocessable_entity }
       end
     end
@@ -42,10 +45,12 @@ class MedicalRecordsController < ApplicationController
   def update
     respond_to do |format|
       if @medical_record.update(medical_record_params)
-        format.html { redirect_to @medical_record, notice: 'Medical record was successfully updated.' }
+        format.html { redirect_to medical_records_url, notice: 'Medical record was successfully updated.' }
+        format.js   { redirect_to medical_records_url }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
+        format.js   { redirect_to medical_records_url }
         format.json { render json: @medical_record.errors, status: :unprocessable_entity }
       end
     end

@@ -1,10 +1,11 @@
 class PrescriptionsController < ApplicationController
   before_action :set_prescription, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json, :js
 
   # GET /prescriptions
   # GET /prescriptions.json
   def index
-    @prescriptions = Prescription.all
+    @prescriptions = Prescription.page(params[:page])
   end
 
   # GET /prescriptions/1
@@ -28,10 +29,12 @@ class PrescriptionsController < ApplicationController
 
     respond_to do |format|
       if @prescription.save
-        format.html { redirect_to @prescription, notice: 'Prescription was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @prescription }
+        format.html { redirect_to prescriptions_url, notice: 'Prescription was successfully created.' }
+        format.js   { redirect_to prescriptions_url }
+        format.json { render action: 'show', status: :created, location: prescriptions_url }
       else
         format.html { render action: 'new' }
+        format.js   { redirect_to prescriptions_url }
         format.json { render json: @prescription.errors, status: :unprocessable_entity }
       end
     end
@@ -42,10 +45,12 @@ class PrescriptionsController < ApplicationController
   def update
     respond_to do |format|
       if @prescription.update(prescription_params)
-        format.html { redirect_to @prescription, notice: 'Prescription was successfully updated.' }
+        format.html { redirect_to prescriptions_url, notice: 'Prescription was successfully updated.' }
+        format.js   { redirect_to prescriptions_url }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
+        format.js   { redirect_to prescriptions_url }
         format.json { render json: @prescription.errors, status: :unprocessable_entity }
       end
     end

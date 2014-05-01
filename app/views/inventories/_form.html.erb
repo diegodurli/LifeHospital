@@ -1,25 +1,9 @@
-<%= form_for(@inventory) do |f| %>
-  <% if @inventory.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@inventory.errors.count, "error") %> prohibited this inventory from being saved:</h2>
-
-      <ul>
-      <% @inventory.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :total_value %><br>
-    <%= f.text_field :total_value %>
+<%= form_for @inventory, html: get_default_form_html_options(@inventory), remote: true do |f| %>
+  <div>
+    <%= f.text_field :total_value, class: 'form-control', placeholder: 'Total Value', value: (number_with_precision(f.object.total_value, precision: 9) || 0), required: true %>
+    <%= f.text_field :document, class: 'form-control', placeholder: 'Document', required: true %>
   </div>
-  <div class="field">
-    <%= f.label :document %><br>
-    <%= f.text_field :document %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div>
+    <%= f.submit action, class: 'btn btn-lg btn-primary btn-block' %>
   </div>
 <% end %>

@@ -28,9 +28,17 @@ class ApplicationController < ActionController::Base
     redirect_to login_url unless current_user
   end
 
-  def get_columns_of(resource)
-    resource.model.column_names - %w{id created_at updated_at}
+  def get_columns_of(resources)
+    if resources
+      resources.first.attribute_names - %w{id created_at updated_at}
+    else
+      []
+    end
   end
 
-  helper_method :current_user, :notification, :get_error_classes, :get_columns_of
+  def get_default_form_html_options(resource)
+    {class: "form-signin #{get_error_classes(resource && resource.errors.any?)}", role: 'form'}
+  end
+
+  helper_method :current_user, :notification, :get_error_classes, :get_columns_of, :get_default_form_html_options
 end

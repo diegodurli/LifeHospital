@@ -1,10 +1,11 @@
 class ProceduresController < ApplicationController
   before_action :set_procedure, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json, :js
 
   # GET /procedures
   # GET /procedures.json
   def index
-    @procedures = Procedure.all
+    @procedures = Procedure.page(params[:page])
   end
 
   # GET /procedures/1
@@ -28,10 +29,12 @@ class ProceduresController < ApplicationController
 
     respond_to do |format|
       if @procedure.save
-        format.html { redirect_to @procedure, notice: 'Procedure was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @procedure }
+        format.html { redirect_to procedures_url, notice: 'Procedure was successfully created.' }
+        format.js   { redirect_to procedures_url }
+        format.json { render action: 'show', status: :created, location: procedures_url }
       else
         format.html { render action: 'new' }
+        format.js   { redirect_to procedures_url }
         format.json { render json: @procedure.errors, status: :unprocessable_entity }
       end
     end
@@ -42,10 +45,12 @@ class ProceduresController < ApplicationController
   def update
     respond_to do |format|
       if @procedure.update(procedure_params)
-        format.html { redirect_to @procedure, notice: 'Procedure was successfully updated.' }
+        format.html { redirect_to procedures_url, notice: 'Procedure was successfully updated.' }
+        format.js   { redirect_to procedures_url }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
+        format.js   { redirect_to procedures_url }
         format.json { render json: @procedure.errors, status: :unprocessable_entity }
       end
     end
