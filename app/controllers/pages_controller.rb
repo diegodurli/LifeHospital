@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
 	skip_before_filter :authenticate
+	skip_before_action :set_model
 
   def index
   end

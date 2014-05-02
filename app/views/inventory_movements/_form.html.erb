@@ -1,43 +1,13 @@
-<%= render partial: 'partials/notifications' %>
-
-<%= form_for(@inventory_movement) do |f| %>
-  <% if @inventory_movement.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@inventory_movement.errors.count, "error") %> prohibited this inventory_movement from being saved:</h2>
-
-      <ul>
-      <% @inventory_movement.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :inventory_id %><br>
-    <%= f.text_field :inventory_id %>
+<%= form_for @record, html: get_default_form_html_options(@record), remote: true do |f| %>
+  <div>
+    <%= f.text_field :inventory_id, class: 'form-control', placeholder: 'Inventory', autofocus: true, required: true %>
+    <%= f.text_field :medicament_id, class: 'form-control', placeholder: 'Medicament', required: true %>
+    <%= f.number_field :quantity, class: 'form-control', placeholder: 'Quantity', required: true %>
+    <%= f.text_field :unit_value, class: 'form-control', placeholder: 'Unit Value', required: true %>
+    <%= f.text_field :total_value, class: 'form-control', placeholder: 'Total Value', required: true %>
+    <%= f.text_field :movement_type, class: 'form-control', placeholder: 'Type', required: true %>
   </div>
-  <div class="field">
-    <%= f.label :medicament_id %><br>
-    <%= f.text_field :medicament_id %>
-  </div>
-  <div class="field">
-    <%= f.label :quantity %><br>
-    <%= f.number_field :quantity %>
-  </div>
-  <div class="field">
-    <%= f.label :unit_value %><br>
-    <%= f.text_field :unit_value %>
-  </div>
-  <div class="field">
-    <%= f.label :total_value %><br>
-    <%= f.text_field :total_value %>
-  </div>
-  <div class="field">
-    <%= f.label :type %><br>
-    <%= f.text_field :type %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div>
+    <%= f.submit action, class: 'btn btn-lg btn-primary btn-block' %>
   </div>
 <% end %>

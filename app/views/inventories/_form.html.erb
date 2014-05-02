@@ -1,4 +1,4 @@
-<%= form_for @inventory, html: get_default_form_html_options(@inventory), remote: true do |f| %>
+<%= form_for @record, html: get_default_form_html_options(@record), remote: true do |f| %>
   <div>
     <%= f.text_field :total_value, class: 'form-control', placeholder: 'Total Value', value: (number_with_precision(f.object.total_value, precision: 9) || 0), required: true %>
     <%= f.text_field :document, class: 'form-control', placeholder: 'Document', required: true %>

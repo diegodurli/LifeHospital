@@ -1,6 +1,4 @@
-<%= render partial: 'partials/notifications' %>
-
-<%= form_for @diet, html: get_default_form_html_options(@diet) do |f| %>
+<%= form_for @record, html: get_default_form_html_options(@record), remote: true do |f| %>
   <div>
     <%= f.text_field :description, class: 'form-control', placeholder: 'Description', autofocus: true, required: true %>
     <%= f.text_field :hospitalization_id, class: 'form-control', placeholder: 'Hospitalization', required: true %>

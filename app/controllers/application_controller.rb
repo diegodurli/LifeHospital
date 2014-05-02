@@ -4,41 +4,117 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :authenticate, only: [:index, :show, :edit, :update, :destroy]
 
-  private
+  before_action :set_model
+  before_action :find_record, only: [:show, :edit, :update, :destroy]
 
-  def current_user
-		@current_user ||= User.exists?(session[:user_id]) if session[:user_id]
+  before_action only: [:show, :destroy, :index] do
+    is_using_modal?(false)
   end
 
-  def notification(type,params)
-  	config = {}
-  	config[:value] 	 	 	= params[:value] || ''
-  	config[:time]  	 	 	= params[:time]  || 2000
-  	config[:image] 		 	= params[:image] || ''
-  	config[:class_name] = "#{type}_notification"
-
-  	gflash type.to_sym => config
+  before_action only: [:edit, :update, :create, :new] do
+    is_using_modal?(true)
   end
 
-  def get_error_classes(have_errors)
-    'animated shake' if have_errors
+  respond_to :html, :json, :js
+
+  def index
+    render partial: 'partials/index', locals: {records: find_records}, layout: 'layouts/application'
   end
 
-  def authenticate
-    redirect_to login_url unless current_user
+  def new
+    @record = @model.new
+    render partial: 'partials/new'
   end
 
-  def get_columns_of(resources)
-    if resources
-      resources.first.attribute_names - %w{id created_at updated_at}
+  def edit
+    render partial: 'partials/edit'
+  end
+
+  def create
+    @record = @model.new(eval("#{@table_name}_params"))
+
+    if @record.save
+      index_response('created')
     else
-      []
+      action_error_response('new', @record)
     end
   end
 
-  def get_default_form_html_options(resource)
-    {class: "form-signin #{get_error_classes(resource && resource.errors.any?)}", role: 'form'}
+  def update
+    if @record.update(eval("#{@table_name}_params"))
+      index_response('updated')
+    else
+      action_error_response('edit', @record)
+    end
   end
 
-  helper_method :current_user, :notification, :get_error_classes, :get_columns_of, :get_default_form_html_options
+  def destroy
+    @record.destroy
+    index_response('deleted')
+  end
+
+  private
+    def set_model
+      @model = self.controller_name.classify.constantize
+      @table_name = @model.table_name.singularize
+      @model_humanized = @model.table_name.singularize.humanize.titleize
+    end
+
+    def find_record
+      @record = @model.find(params[:id])
+    end
+
+    def find_records
+      @model.order(:id)
+    end
+
+    def index_response(action)
+      notification 'success', {value: "#{@model_humanized} was successfully #{action}."}
+      render partial: 'partials/index', locals: {records: find_records}
+    end
+
+    def action_error_response(action,record)
+      notification 'error', {value: record.errors.full_messages.join('<br>')}
+      render partial: "partials/#{action}"
+    end
+
+    def current_user
+  		@current_user ||= User.exists?(session[:user_id]) if session[:user_id]
+    end
+
+    def notification(type,params)
+    	config = {}
+    	config[:value] 	 	 	= params[:value] || ''
+    	config[:time]  	 	 	= params[:time]  || 2000
+    	config[:image] 		 	= params[:image] || ''
+    	config[:class_name] = "#{type}_notification"
+
+    	gflash type.to_sym => config
+    end
+
+    def get_error_classes(have_errors)
+      'animated shake' if have_errors
+    end
+
+    def authenticate
+      redirect_to login_url unless current_user
+    end
+
+    def get_columns_of(resources)
+      if not resources.empty?
+        resources.first.attribute_names - %w{id created_at updated_at}
+      else
+        []
+      end
+    end
+
+    def get_default_form_html_options(resource)
+      {class: "form-signin #{get_error_classes(resource && resource.errors.any?)}", role: 'form'}
+    end
+
+    def is_using_modal?(value)
+      @using_modal = value
+    end
+
+    helper_method :current_user, :notification, :get_error_classes, :get_columns_of, :get_default_form_html_options
 end

@@ -1,6 +1,4 @@
-<%= render partial: 'partials/notifications' %>
-
-<%= form_for @exam, html: get_default_form_html_options(@exam) do |f| %>
+<%= form_for @record, html: get_default_form_html_options(@record), remote: true do |f| %>
   <div>
     <%= f.text_area :description, class: 'form-control', placeholder: 'Description', autofocus: true, required: true %>
     <%= f.text_area :observations, class: 'form-control', placeholder: 'Observations', required: true %>

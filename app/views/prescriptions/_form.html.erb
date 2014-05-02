@@ -1,35 +1,11 @@
-<%= render partial: 'partials/notifications' %>
-
-<%= form_for(@prescription) do |f| %>
-  <% if @prescription.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@prescription.errors.count, "error") %> prohibited this prescription from being saved:</h2>
-
-      <ul>
-      <% @prescription.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :quantity %><br>
-    <%= f.number_field :quantity %>
+<%= form_for @record, html: get_default_form_html_options(@record), remote: true do |f| %>
+  <div>
+    <%= f.number_field :quantity, class: 'form-control', placeholder: 'Quantity', autofocus: true, required: true %>
+    <%= f.text_field :unit, class: 'form-control', placeholder: 'Unit', required: true %>
+    <%= f.text_field :diet, class: 'form-control', placeholder: 'Diet', required: true %>
+    <%= f.text_field :calories, class: 'form-control', placeholder: 'Calories', required: true %>
   </div>
-  <div class="field">
-    <%= f.label :unit %><br>
-    <%= f.text_field :unit %>
-  </div>
-  <div class="field">
-    <%= f.label :diet %><br>
-    <%= f.text_field :diet %>
-  </div>
-  <div class="field">
-    <%= f.label :calories %><br>
-    <%= f.text_field :calories %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div>
+    <%= f.submit action, class: 'btn btn-lg btn-primary btn-block' %>
   </div>
 <% end %>

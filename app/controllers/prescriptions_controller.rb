@@ -1,76 +1,33 @@
 class PrescriptionsController < ApplicationController
-  before_action :set_prescription, only: [:show, :edit, :update, :destroy]
-  respond_to :html, :json, :js
 
-  # GET /prescriptions
-  # GET /prescriptions.json
   def index
-    @prescriptions = Prescription.page(params[:page])
+    super
   end
 
-  # GET /prescriptions/1
-  # GET /prescriptions/1.json
   def show
   end
 
-  # GET /prescriptions/new
   def new
-    @prescription = Prescription.new
+    super
   end
 
-  # GET /prescriptions/1/edit
   def edit
+    super
   end
 
-  # POST /prescriptions
-  # POST /prescriptions.json
   def create
-    @prescription = Prescription.new(prescription_params)
-
-    respond_to do |format|
-      if @prescription.save
-        format.html { redirect_to prescriptions_url, notice: 'Prescription was successfully created.' }
-        format.js   { redirect_to prescriptions_url }
-        format.json { render action: 'show', status: :created, location: prescriptions_url }
-      else
-        format.html { render action: 'new' }
-        format.js   { redirect_to prescriptions_url }
-        format.json { render json: @prescription.errors, status: :unprocessable_entity }
-      end
-    end
+    super
   end
 
-  # PATCH/PUT /prescriptions/1
-  # PATCH/PUT /prescriptions/1.json
   def update
-    respond_to do |format|
-      if @prescription.update(prescription_params)
-        format.html { redirect_to prescriptions_url, notice: 'Prescription was successfully updated.' }
-        format.js   { redirect_to prescriptions_url }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.js   { redirect_to prescriptions_url }
-        format.json { render json: @prescription.errors, status: :unprocessable_entity }
-      end
-    end
+    super
   end
 
-  # DELETE /prescriptions/1
-  # DELETE /prescriptions/1.json
   def destroy
-    @prescription.destroy
-    respond_to do |format|
-      format.html { redirect_to prescriptions_url }
-      format.json { head :no_content }
-    end
+    super
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_prescription
-      @prescription = Prescription.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def prescription_params

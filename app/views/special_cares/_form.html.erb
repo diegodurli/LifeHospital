@@ -1,31 +1,15 @@
-<%= render partial: 'partials/notifications' %>
-
-<%= form_for(@special_care) do |f| %>
-  <% if @special_care.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@special_care.errors.count, "error") %> prohibited this special_care from being saved:</h2>
-
-      <ul>
-      <% @special_care.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
+<%= form_for @record, html: get_default_form_html_options(@record), remote: true do |f| %>
+  <div>
+    <%= f.text_area :description, class: 'form-control', placeholder: 'Description', autofocus: true, required: true %>
+    <%#= f.date_select :desactivation, class: 'form-control', placeholder: 'Desactivation', required: true %>
+		<div id="special_care_desactivation_date">
+			<div class="input-group date">
+    		<%= f.text_field :desactivation, class: 'form-control', placeholder: 'Desactivation', required: true %><span class="input-group-addon"><%= fa_icon 'calendar' %></span>
+			</div>
+		</div>
+    <%= f.text_field :hospitalization_id, class: 'form-control', placeholder: 'Hospitalization', required: true %>
   </div>
-  <div class="field">
-    <%= f.label :desactivation %><br>
-    <%= f.date_select :desactivation %>
-  </div>
-  <div class="field">
-    <%= f.label :hospitalization_id %><br>
-    <%= f.text_field :hospitalization_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div>
+    <%= f.submit action, class: 'btn btn-lg btn-primary btn-block' %>
   </div>
 <% end %>

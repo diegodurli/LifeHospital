@@ -1,76 +1,33 @@
 class MedicamentsController < ApplicationController
-  before_action :set_medicament, only: [:show, :edit, :update, :destroy]
-  respond_to :html, :json, :js
 
-  # GET /medicaments
-  # GET /medicaments.json
   def index
-    @medicaments = Medicament.page(params[:page])
+    super
   end
 
-  # GET /medicaments/1
-  # GET /medicaments/1.json
   def show
   end
 
-  # GET /medicaments/new
   def new
-    @medicament = Medicament.new
+    super
   end
 
-  # GET /medicaments/1/edit
   def edit
+    super
   end
 
-  # POST /medicaments
-  # POST /medicaments.json
   def create
-    @medicament = Medicament.new(medicament_params)
-
-    respond_to do |format|
-      if @medicament.save
-        format.html { redirect_to medicaments_url, notice: 'Medicament was successfully created.' }
-        format.js   { redirect_to medicaments_url }
-        format.json { render action: 'show', status: :created, location: medicaments_url }
-      else
-        format.html { render action: 'new' }
-        format.js   { redirect_to medicaments_url }
-        format.json { render json: @medicament.errors, status: :unprocessable_entity }
-      end
-    end
+    super
   end
 
-  # PATCH/PUT /medicaments/1
-  # PATCH/PUT /medicaments/1.json
   def update
-    respond_to do |format|
-      if @medicament.update(medicament_params)
-        format.html { redirect_to medicaments_url, notice: 'Medicament was successfully updated.' }
-        format.js   { redirect_to medicaments_url }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.js   { redirect_to medicaments_url }
-        format.json { render json: @medicament.errors, status: :unprocessable_entity }
-      end
-    end
+    super
   end
 
-  # DELETE /medicaments/1
-  # DELETE /medicaments/1.json
   def destroy
-    @medicament.destroy
-    respond_to do |format|
-      format.html { redirect_to medicaments_url }
-      format.json { head :no_content }
-    end
+    super
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_medicament
-      @medicament = Medicament.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def medicament_params

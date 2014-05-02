@@ -92,9 +92,9 @@ ActiveRecord::Schema.define(version: 20140501172530) do
   create_table "medical_records", force: true do |t|
     t.text     "description"
     t.text     "historic"
+    t.integer  "hospitalization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "hospitalization_id"
   end
 
   add_index "medical_records", ["hospitalization_id"], name: "index_medical_records_on_hospitalization_id"

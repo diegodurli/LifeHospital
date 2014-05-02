@@ -1,27 +1,10 @@
-<%= render partial: 'partials/notifications' %>
-
-<%= form_for(@medical_record) do |f| %>
-  <% if @medical_record.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@medical_record.errors.count, "error") %> prohibited this medical_record from being saved:</h2>
-
-      <ul>
-      <% @medical_record.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
+<%= form_for @record, html: get_default_form_html_options(@record), remote: true do |f| %>
+  <div>
+    <%= f.text_area :description, class: 'form-control', placeholder: 'Description', autofocus: true, required: true %>
+    <%= f.text_area :historic, class: 'form-control', placeholder: 'Historic', required: true %>
+    <%= f.text_field :hospitalization_id, class: 'form-control', placeholder: 'Hospitalization', required: true %>
   </div>
-  <div class="field">
-    <%= f.label :historic %><br>
-    <%= f.text_field :historic %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div>
+    <%= f.submit action, class: 'btn btn-lg btn-primary btn-block' %>
   </div>
 <% end %>
