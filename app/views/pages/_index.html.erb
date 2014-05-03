@@ -1,0 +1,86 @@
+<% if current_user %>
+	<div class="row">
+	  <div class="col-xs-12 col-md-4">
+	    <a href="#" class="thumbnail">
+		    <%= fa_stacked_icon "users", base: "square-o", class: 'squared_icons fa-4x' %>
+		    <div id='stacked_icon_text'>Patients</div>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-4">
+	    <a href="<%= diets_path %>" class="thumbnail">
+		    <%= fa_stacked_icon "cutlery", base: "square-o", class: 'squared_icons fa-4x' %>
+		    <div id='stacked_icon_text'>Diet</div>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-4">
+	    <a href="<%= clinical_outcomes_path %>" class="thumbnail">
+		    <%= fa_stacked_icon "user-md", base: "square-o", class: 'squared_icons fa-4x' %>
+		    <div id='stacked_icon_text'>Clinical Outcomes</div>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-4">
+	    <a href="<%= exams_path %>" class="thumbnail">
+		    <%= fa_stacked_icon "stethoscope", base: "square-o", class: 'squared_icons fa-4x' %>
+		    <div id='stacked_icon_text'>Exams</div>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-4">
+	    <a href="<%= hospitalizations_path %>" class="thumbnail">
+		    <%= fa_stacked_icon "hospital-o", base: "square-o", class: 'squared_icons fa-4x' %>
+		    <div id='stacked_icon_text'>Hospitalizations</div>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-4">
+	    <a href="<%= inventories_path %>" class="thumbnail">
+		    <%= fa_stacked_icon "briefcase", base: "square-o", class: 'squared_icons fa-4x' %>
+		    <div id='stacked_icon_text'>Inventories</div>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-4">
+	    <a href="<%= inventory_movements_path %>" class="thumbnail">
+		    <%= fa_stacked_icon "briefcase", base: "square-o", class: 'squared_icons fa-4x' %>
+		    <div id='stacked_icon_text'>Inventory Movements</div>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-4">
+	    <a href="<%= medical_records_path %>" class="thumbnail">
+		    <%= fa_stacked_icon "folder-open", base: "square-o", class: 'squared_icons fa-4x' %>
+		    <div id='stacked_icon_text'>Medical Records</div>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-4">
+	    <a href="<%= medicaments_path %>" class="thumbnail">
+		    <%= fa_stacked_icon "medkit", base: "square-o", class: 'squared_icons fa-4x' %>
+		    <div id='stacked_icon_text'>Medicaments</div>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-4">
+	    <a href="<%= prescriptions_path %>" class="thumbnail">
+		    <%= fa_stacked_icon "edit", base: "square-o", class: 'squared_icons fa-4x' %>
+		    <div id='stacked_icon_text'>Prescriptions</div>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-4">
+	    <a href="<%= procedures_path %>" class="thumbnail">
+		    <%= fa_stacked_icon "plus-square", base: "square-o", class: 'squared_icons fa-4x' %>
+		    <div id='stacked_icon_text'>Procedures</div>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-4">
+	    <a href="<%= serums_path %>" class="thumbnail">
+		    <%= fa_stacked_icon "flask", base: "square-o", class: 'squared_icons fa-4x' %>
+		    <div id='stacked_icon_text'>Serums</div>
+	    </a>
+	  </div>
+	  <div class="col-xs-12 col-md-4">
+	    <a href="<%= special_cares_path %>" class="thumbnail">
+		    <%= fa_stacked_icon "exclamation", base: "square-o", class: 'squared_icons fa-4x' %>
+		    <div id='stacked_icon_text'>Special Cares</div>
+	    </a>
+	  </div>
+	</div>
+<% else %>
+	<div class="jumbotron">
+	  <h1>Welcome to Life Hospital!</h1>
+	</div>
+<% end %>

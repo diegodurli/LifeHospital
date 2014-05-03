@@ -1,38 +1,45 @@
 <% title = records.table.name.titleize
    name_singular = records.table.name.singularize %>
 
-<h1><%= title %></h1><br>
-
 <%= render partial: 'partials/modal', locals: {title: title} %>
 <% columns = get_columns_of(records) %>
 
 <div class="row">
-  <%= link_to fa_icon('plus 2x'), send("new_#{name_singular}_path"), class: "btn btn-right", role: 'button', remote: true %>
+  <div class="col-xs-2 col-sm-2 col-md-2">
+    <%= link_to fa_icon('plus 2x'), send("new_#{name_singular}_path"), class: "btn btn-right", role: 'button', remote: true %>
+  </div>
+  <div class="col-xs-10 col-sm-10 col-md-10">
+    <h1><%= title %></h1>
+  </div>
 </div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-hover table-condensed">
+        <thead>
+          <tr>
+            <% columns.each do |column| %>
+              <th><%= column.humanize %></th>
+            <% end %>
+            <th></th>
+          </tr>
+        </thead>
 
-<div class="table-responsive">
-  <table class="table table-hover table-condensed">
-    <thead>
-      <tr>
-        <% columns.each do |column| %>
-          <th><%= column.humanize %></th>
-        <% end %>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% records.each do |record| %>
-        <tr>
-          <% columns.each do |column| %>
-            <td><%= record[column] %></td>
+        <tbody>
+          <% records.each do |record| %>
+            <tr>
+              <% columns.each do |column| %>
+                <td><%= record[column] %></td>
+              <% end %>
+              <td class='icons-cell'>
+                <%= link_to fa_icon('edit 2x'), send("edit_#{name_singular}_path", record), remote: true %>
+                <%= link_to fa_icon('trash-o 2x'), record, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
+              </td>
+            </tr>
           <% end %>
-          <td class='icons-cell'>
-            <%= link_to fa_icon('edit 2x'), send("edit_#{name_singular}_path", record), remote: true %>
-            <%= link_to fa_icon('trash-o 2x'), record, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

@@ -3,6 +3,7 @@ class PagesController < ApplicationController
 	skip_before_action :set_model
 
   def index
+    render partial: 'index', layout: 'layouts/application'
   end
 
   def routing_error

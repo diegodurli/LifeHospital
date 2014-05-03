@@ -1,8 +1,13 @@
 class SessionsController < ApplicationController
+  skip_before_action :set_model
+  skip_before_action :find_record
+
   def new
     if current_user
       redirect_to root_url
     end
+
+    render_partial 'new'
   end
 
   def create
@@ -17,7 +22,7 @@ class SessionsController < ApplicationController
   	else
       @have_errors = true
   		notification 'error', {value: 'Please, check your credentials.'}
-  		render 'new'
+  		render_partial 'new'
   	end
   end
 

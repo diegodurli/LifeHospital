@@ -116,5 +116,9 @@ class ApplicationController < ActionController::Base
       @using_modal = value
     end
 
+    def render_partial(action)
+      render partial: action, layout: 'layouts/application'
+    end
+
     helper_method :current_user, :notification, :get_error_classes, :get_columns_of, :get_default_form_html_options
 end
