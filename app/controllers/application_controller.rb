@@ -78,8 +78,18 @@ class ApplicationController < ActionController::Base
       render partial: "partials/#{action}"
     end
 
+    def logged_user
+      not current_user().new_record?
+    end
+
     def current_user
-  		@current_user ||= User.exists?(session[:user_id]) if session[:user_id]
+      if session[:user_id]
+  		  @current_user = User.find(session[:user_id])
+      else
+        @current_user = User.new
+      end
+
+      @current_user
     end
 
     def notification(type,params)
@@ -97,7 +107,7 @@ class ApplicationController < ActionController::Base
     end
 
     def authenticate
-      redirect_to login_url unless current_user
+      redirect_to login_url unless logged_user
     end
 
     def get_columns_of(resources)
@@ -120,5 +130,9 @@ class ApplicationController < ActionController::Base
       render partial: action, layout: 'layouts/application'
     end
 
-    helper_method :current_user, :notification, :get_error_classes, :get_columns_of, :get_default_form_html_options
+    def gravatar_url
+      current_user().gravatar_url
+    end
+
+    helper_method :current_user, :notification, :get_error_classes, :get_columns_of, :get_default_form_html_options, :gravatar_url, :logged_user
 end

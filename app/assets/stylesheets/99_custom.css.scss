@@ -17,8 +17,22 @@ body, html {
   top: 22px;
 }
 
+.user-button-group {
+  position: absolute;
+  right: 5%;
+}
+
 .datepicker {
   z-index: 2151 !important;
+}
+
+.jumbotron {
+  text-align: center;
+}
+
+.dropdown-menu {
+  right: 0;
+  left: auto;
 }
 
 #stacked_icon_text {
@@ -37,6 +51,21 @@ body, html {
 
 .squared_icons {
   padding-top: 5px;
+}
+
+.img-circle {
+  margin-top: 2px;
+  background: #FFFFFF;
+  -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.3);
+  -moz-box-shadow:    0 0 4px rgba(0,0,0,0.3);
+  box-shadow:         0 0 4px rgba(0,0,0,0.3);
+}
+
+.img-circle:hover {
+  background: #2980b9;
+  -webkit-box-shadow: 0 0 4px rgba(41,128,185,1);
+  -moz-box-shadow:    0 0 4px rgba(41,128,185,1);
+  box-shadow:         0 0 4px rgba(41,128,185,1);
 }
 
 /* Extra Small Devices */

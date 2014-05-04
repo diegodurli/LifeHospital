@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   skip_before_action :find_record
 
   def new
-    if current_user
+    if logged_user
       redirect_to root_url
     end
 
@@ -27,8 +27,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-  	session[:user_id] = nil
-  	notification 'info', {value: 'You logged out!'}
+  	notification 'info', {value: "See you, #{current_user().name}!"}
+    session[:user_id] = nil
   	redirect_to root_url
   end
 end
