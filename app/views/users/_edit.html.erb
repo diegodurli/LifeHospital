@@ -1,1 +1,5 @@
-<%= render 'form' %>
+<%= render 'form', action: 'Update' %>
+
+<div>
+  <%= link_to fa_icon('trash-o', text: 'Delete Profile'), current_user, class: 'btn btn-lg btn-primary btn-block btn-danger custom-btn-danger', method: :delete, remote: true, data: {confirm: 'Do you really want to delete your account?'} %>
+</div>

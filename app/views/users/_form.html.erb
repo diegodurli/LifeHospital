@@ -11,6 +11,6 @@
     <%= f.select :user_type, get_options_for_user_type_signup_form(), {selected: 'D'}, {class: 'form-control', required: true} %>
   </div>
   <div>
-    <%= f.submit 'Create User', class: 'btn btn-lg btn-primary btn-block' %>
+    <%= f.submit "#{action} User", class: 'btn btn-lg btn-primary btn-block' %>
   </div>
 <% end %>

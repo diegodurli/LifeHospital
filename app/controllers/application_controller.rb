@@ -84,9 +84,9 @@ class ApplicationController < ActionController::Base
 
     def current_user
       if session[:user_id]
-  		  @current_user = User.find(session[:user_id])
+  		  @current_user ||= User.find(session[:user_id])
       else
-        @current_user = User.new
+        @current_user ||= User.new
       end
 
       @current_user
@@ -95,7 +95,7 @@ class ApplicationController < ActionController::Base
     def notification(type,params)
     	config = {}
     	config[:value] 	 	 	= params[:value] || ''
-    	config[:time]  	 	 	= params[:time]  || 2000
+    	config[:time]  	 	 	= params[:time]  || 1000
     	config[:image] 		 	= params[:image] || ''
     	config[:class_name] = "#{type}_notification"
 

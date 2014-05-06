@@ -1,15 +1,15 @@
-<!-- Static navbar -->
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="<%= root_url %>">Life Hospital</a>
-
       <ul class="nav navbar-right">
         <div class="btn-group user-button-group">
           <%= image_tag gravatar_url, "data-toggle" => 'dropdown', type: 'button', class: 'img-circle img-responsive dropdown-toggle' %>
           <ul class="dropdown-menu">
             <% if logged_user %>
               <li><a href="<%= logout_url %>">Logout</a></li>
+              <li class="divider"></li>
+              <li><a href="<%= edit_user_path current_user %>">Profile</a></li>
             <% else %>
               <li><a href="<%= login_url %>">Login</a></li>
               <li class="divider"></li>

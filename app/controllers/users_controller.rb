@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  skip_before_action :set_model
+  skip_before_action :find_record
 
   def index
   end
@@ -25,9 +27,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      session[:user_id] = @user.id
       Notifier.registration(@user.name, @user.email).deliver
       notification 'success', {value: "Welcome, #{@user.name}!"}
-      session[:user_id] = @user.id
+
       redirect_to root_url
     else
       notification 'error', {value: @user.errors.full_messages.join('<br>')}
@@ -38,7 +41,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       notification 'success', {value: "User was successfully updated."}
-      render_partial 'show'
+      render_partial 'edit'
     else
       notification 'error', {value: @user.errors.full_messages.join('<br>')}
       render_partial 'edit'
@@ -47,7 +50,9 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to logout_url
+    session[:user_id] = nil
+    notification 'info', {value: "See you, #{@user.name}!"}
+    render js: "window.location = '#{root_url}'"
   end
 
   private
