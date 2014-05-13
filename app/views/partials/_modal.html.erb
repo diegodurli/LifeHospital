@@ -1,12 +1,14 @@
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+<div class="modal fade" id="<%= id %>" tabindex="-1" role="dialog" aria-labelledby="<%= id %>Label" aria-hidden="true">
+  <div id="modal_size" class="modal-dialog <%= size %>">
     <div id="modal-notifications"></div>
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel"><%= title %></h4>
+        <div id="wrapper_modal_header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="<%= id %>Label"><%= title %></h4>      
+        </div>
       </div>
-      <div id="modal-content" class="modal-body">
+      <div id="<%= id %>Content" class="modal-body">
       </div>
     </div>
   </div>

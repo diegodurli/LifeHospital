@@ -3,7 +3,13 @@
     <%= f.text_area :description, class: 'form-control', placeholder: 'Description', autofocus: true, required: true %>
     <%= f.text_area :observations, class: 'form-control', placeholder: 'Observations', required: true %>
     <%= f.text_field :status, class: 'form-control', placeholder: 'Status', required: true %>
-    <%= f.text_field :medicalrecord_id, class: 'form-control', placeholder: 'Medical Record', required: true %>
+
+    <div class="input-group">
+    	<%= f.text_field :medicalrecord_id, class: 'form-control', placeholder: 'Medical Record', disabled: false, required: true %>
+  		<%= content_tag 'span', class: 'input-group-btn' do %>
+    		<%= button_tag fa_icon('search'), id: 'modal_search_button', name: 'Medical Records', type: 'button', class: 'btn btn-default form-control' %>
+    	<% end %>
+    </div>
   </div>
   <div>
     <%= f.submit action, class: 'btn btn-lg btn-primary btn-block' %>

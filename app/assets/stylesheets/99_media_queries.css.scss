@@ -1,0 +1,49 @@
+/* Extra Small Devices */
+@media screen and (max-width: 470px) {
+  .btn-right {
+    top: 40px;
+  }
+}
+
+@media screen and (min-width: 470px) and (max-width: 768px) {
+  #stacked_icon_text {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+  }
+
+  .error_notification,
+  .success_notification,
+  .info_notification {
+    height: 40px;
+    font-size: 20px;
+  }
+}
+
+/* Small Devices */
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  #stacked_icon_text {
+    margin-top: -78px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 30px;
+  }
+}
+
+/* Medium Devices */
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  #stacked_icon_text {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+  }
+}
+
+/* Large Devices */
+@media screen and (min-width: 1200px) {
+  #stacked_icon_text {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 24px;
+  }
+}

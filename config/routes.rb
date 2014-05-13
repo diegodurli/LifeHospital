@@ -5,6 +5,8 @@ LifeHospital::Application.routes.draw do
   post "/login", to: "sessions#create"
   get "/logout", to: "sessions#destroy"
 
+  get '/get_records', to: "application#get_records"
+
   get '/signup', to: 'users#new'
   resources :users
 

@@ -1,7 +1,8 @@
 <% title = records.table.name.titleize
    name_singular = records.table.name.singularize %>
 
-<%= render partial: 'partials/modal', locals: {title: title} %>
+<%= render partial: 'partials/modal', locals: {id: 'formModal', title: title, size: 'modal-sm'} %>
+<%= render partial: 'partials/modal', locals: {id: 'searchModal', title: '', size: 'modal-lg'} %>
 <% columns = get_columns_of(records) %>
 
 <div class="row">

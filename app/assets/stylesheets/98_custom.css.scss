@@ -3,7 +3,8 @@ body, html {
   padding-top: 40px;
 }
 
-#myModal {
+#formModal,
+#searchModal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -42,6 +43,23 @@ body, html {
   left: auto;
 }
 
+.fa-angle-left {
+  padding-right: 15px;
+}
+
+#btn_angle_left {
+  width: 30px;
+  margin-top: -5px;
+}
+
+.modal-header {
+  height: 60px;
+}
+
+#wrapper_modal_header {
+  margin-top: 3px;
+}
+
 #stacked_icon_text {
   width: 100%;
   position: relative;
@@ -73,54 +91,4 @@ body, html {
   -webkit-box-shadow: 0 0 4px rgba(41,128,185,1);
   -moz-box-shadow:    0 0 4px rgba(41,128,185,1);
   box-shadow:         0 0 4px rgba(41,128,185,1);
-}
-
-/* Extra Small Devices */
-@media screen and (max-width: 470px) {
-  .btn-right {
-    top: 40px;
-  }
-}
-
-@media screen and (min-width: 470px) and (max-width: 768px) {
-  #stacked_icon_text {
-    font-family: 'Lato', sans-serif;
-    font-weight: 300;
-    font-size: 18px;
-  }
-
-  .error_notification,
-  .success_notification,
-  .info_notification {
-    height: 40px;
-    font-size: 20px;
-  }
-}
-
-/* Small Devices */
-@media screen and (min-width: 768px) and (max-width: 992px) {
-  #stacked_icon_text {
-    margin-top: -78px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 300;
-    font-size: 30px;
-  }
-}
-
-/* Medium Devices */
-@media screen and (min-width: 992px) and (max-width: 1200px) {
-  #stacked_icon_text {
-    font-family: 'Lato', sans-serif;
-    font-weight: 300;
-    font-size: 18px;
-  }
-}
-
-/* Large Devices */
-@media screen and (min-width: 1200px) {
-  #stacked_icon_text {
-    font-family: 'Lato', sans-serif;
-    font-weight: 300;
-    font-size: 24px;
-  }
 }

@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :authenticate, only: [:index, :show, :edit, :update, :destroy]
 
-  before_action :set_model
+  before_action :set_model, except: [:get_records]
   before_action :find_record, only: [:show, :edit, :update, :destroy]
 
   before_action only: [:show, :destroy, :index] do
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
   def new
     @record = @model.new
-    render partial: 'partials/new'
+    render partial: 'partials/new', locals: {label: @model_humanized}
   end
 
   def edit
@@ -53,11 +53,15 @@ class ApplicationController < ActionController::Base
     index_response('deleted')
   end
 
+  def get_records
+    render partial: 'partials/show_records', locals: {resource: params[:name]}
+  end
+
   private
     def set_model
       @model = self.controller_name.classify.constantize
       @table_name = @model.table_name.singularize
-      @model_humanized = @model.table_name.singularize.humanize.titleize
+      @model_humanized = @table_name.humanize.titleize
     end
 
     def find_record
@@ -66,6 +70,10 @@ class ApplicationController < ActionController::Base
 
     def find_records
       @model.order(:id)
+    end
+
+    def find_records_from_string(model)
+      model.sub(' ','').classify.safe_constantize.all
     end
 
     def index_response(action)
@@ -95,7 +103,7 @@ class ApplicationController < ActionController::Base
     def notification(type,params)
     	config = {}
     	config[:value] 	 	 	= params[:value] || ''
-    	config[:time]  	 	 	= params[:time]  || 1000
+    	config[:time]  	 	 	= params[:time]  || 1500
     	config[:image] 		 	= params[:image] || ''
     	config[:class_name] = "#{type}_notification"
 
@@ -134,5 +142,5 @@ class ApplicationController < ActionController::Base
       current_user().gravatar_url
     end
 
-    helper_method :current_user, :notification, :get_error_classes, :get_columns_of, :get_default_form_html_options, :gravatar_url, :logged_user
+    helper_method :current_user, :notification, :get_error_classes, :get_columns_of, :get_default_form_html_options, :gravatar_url, :logged_user, :find_records_from_string
 end
