@@ -1,4 +1,4 @@
-class SerumsController < ApplicationController
+class PatientsController < ApplicationController
 
   def index
     super
@@ -30,7 +30,7 @@ class SerumsController < ApplicationController
   private
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def serum_params
-      params.require(:serum).permit(:description)
+    def patient_params
+      params.require(:patient).permit(:email, :name, :document, :phone, :address, :contact)
     end
 end

@@ -1,4 +1,4 @@
 class InventoryMovement < ActiveRecord::Base
   belongs_to :inventory
-  belongs_to :medicament
+  has_one :medicament
 end

@@ -31,6 +31,6 @@ class DietsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def diet_params
-      params.require(:diet).permit(:description, :hospitalization_id)
+      params.require(:diet).permit(:description, :calories, :hospitalization_id)
     end
 end

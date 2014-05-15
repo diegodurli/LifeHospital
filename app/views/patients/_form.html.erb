@@ -1,0 +1,13 @@
+<%= form_for @record, html: get_default_form_html_options(@record), remote: true do |f| %>
+  <div>
+    <%= f.text_field :name, class: 'form-control', placeholder: 'Name', autofocus: true, required: true %>
+    <%= f.text_field :document, class: 'form-control', placeholder: 'Document', required: true %>
+    <%= f.text_field :email, class: 'form-control', placeholder: 'Email', required: true %>
+    <%= f.text_field :phone, class: 'form-control', placeholder: 'Phone', required: true %>
+    <%= f.text_field :address, class: 'form-control', placeholder: 'Address', required: true %>
+    <%= f.text_field :contact, class: 'form-control', placeholder: 'Contact', required: true %>
+  </div>
+  <div>
+    <%= f.submit action, class: 'btn btn-lg btn-primary btn-block' %>
+  </div>
+<% end %>

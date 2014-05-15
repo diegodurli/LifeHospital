@@ -11,18 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140515050746) do
+ActiveRecord::Schema.define(version: 20140515062937) do
 
   create_table "clinical_outcomes", force: true do |t|
     t.text     "description"
     t.text     "observations"
     t.string   "status"
-    t.integer  "medicalrecord_id"
+    t.integer  "medical_record_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "clinical_outcomes", ["medicalrecord_id"], name: "index_clinical_outcomes_on_medicalrecord_id"
+  add_index "clinical_outcomes", ["medical_record_id"], name: "index_clinical_outcomes_on_medical_record_id"
 
   create_table "diets", force: true do |t|
     t.text     "description"
@@ -39,24 +39,24 @@ ActiveRecord::Schema.define(version: 20140515050746) do
     t.text     "observations"
     t.text     "archive"
     t.boolean  "scheduled"
-    t.integer  "medicalrecord_id"
+    t.integer  "medical_record_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "exams", ["medicalrecord_id"], name: "index_exams_on_medicalrecord_id"
+  add_index "exams", ["medical_record_id"], name: "index_exams_on_medical_record_id"
 
   create_table "hospitalizations", force: true do |t|
     t.text     "location"
     t.text     "procedures"
     t.text     "treatments"
     t.integer  "patient_id"
-    t.integer  "medicalrecord_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "medical_record_id"
   end
 
-  add_index "hospitalizations", ["medicalrecord_id"], name: "index_hospitalizations_on_medicalrecord_id"
+  add_index "hospitalizations", ["medical_record_id"], name: "index_hospitalizations_on_medical_record_id"
   add_index "hospitalizations", ["patient_id"], name: "index_hospitalizations_on_patient_id"
 
   create_table "inventories", force: true do |t|
@@ -94,13 +94,13 @@ ActiveRecord::Schema.define(version: 20140515050746) do
     t.text     "description"
     t.decimal  "dosage"
     t.integer  "inventory_min"
-    t.integer  "medicalrecord_id"
+    t.integer  "medical_record_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "quantity"
   end
 
-  add_index "medicaments", ["medicalrecord_id"], name: "index_medicaments_on_medicalrecord_id"
+  add_index "medicaments", ["medical_record_id"], name: "index_medicaments_on_medical_record_id"
 
   create_table "patients", force: true do |t|
     t.string   "name"
@@ -129,12 +129,12 @@ ActiveRecord::Schema.define(version: 20140515050746) do
     t.text     "description"
     t.text     "observations"
     t.boolean  "scheduled"
-    t.integer  "medicalrecord_id"
+    t.integer  "medical_record_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "procedures", ["medicalrecord_id"], name: "index_procedures_on_medicalrecord_id"
+  add_index "procedures", ["medical_record_id"], name: "index_procedures_on_medical_record_id"
 
   create_table "special_cares", force: true do |t|
     t.text     "description"
