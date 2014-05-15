@@ -24,6 +24,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'better_errors'
   gem 'sqlite3'
+  gem 'rails-erd'
 end
 
 group :production do

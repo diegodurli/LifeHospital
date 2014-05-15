@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140501172530) do
+ActiveRecord::Schema.define(version: 20140515050746) do
 
   create_table "clinical_outcomes", force: true do |t|
     t.text     "description"
@@ -24,21 +24,12 @@ ActiveRecord::Schema.define(version: 20140501172530) do
 
   add_index "clinical_outcomes", ["medicalrecord_id"], name: "index_clinical_outcomes_on_medicalrecord_id"
 
-  create_table "diet_prescriptions", force: true do |t|
-    t.integer  "diet_id"
-    t.integer  "prescription_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "diet_prescriptions", ["diet_id"], name: "index_diet_prescriptions_on_diet_id"
-  add_index "diet_prescriptions", ["prescription_id"], name: "index_diet_prescriptions_on_prescription_id"
-
   create_table "diets", force: true do |t|
     t.text     "description"
     t.integer  "hospitalization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "calories"
   end
 
   add_index "diets", ["hospitalization_id"], name: "index_diets_on_hospitalization_id"
@@ -59,14 +50,14 @@ ActiveRecord::Schema.define(version: 20140501172530) do
     t.text     "location"
     t.text     "procedures"
     t.text     "treatments"
-    t.integer  "user_id"
+    t.integer  "patient_id"
     t.integer  "medicalrecord_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "hospitalizations", ["medicalrecord_id"], name: "index_hospitalizations_on_medicalrecord_id"
-  add_index "hospitalizations", ["user_id"], name: "index_hospitalizations_on_user_id"
+  add_index "hospitalizations", ["patient_id"], name: "index_hospitalizations_on_patient_id"
 
   create_table "inventories", force: true do |t|
     t.decimal  "total_value"
@@ -92,9 +83,9 @@ ActiveRecord::Schema.define(version: 20140501172530) do
   create_table "medical_records", force: true do |t|
     t.text     "description"
     t.text     "historic"
-    t.integer  "hospitalization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "hospitalization_id"
   end
 
   add_index "medical_records", ["hospitalization_id"], name: "index_medical_records_on_hospitalization_id"
@@ -106,18 +97,33 @@ ActiveRecord::Schema.define(version: 20140501172530) do
     t.integer  "medicalrecord_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "quantity"
   end
 
   add_index "medicaments", ["medicalrecord_id"], name: "index_medicaments_on_medicalrecord_id"
 
-  create_table "prescriptions", force: true do |t|
-    t.integer  "quantity"
-    t.string   "unit"
-    t.text     "diet"
-    t.decimal  "calories"
+  create_table "patients", force: true do |t|
+    t.string   "name"
+    t.integer  "document"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "address"
+    t.string   "contact"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "prescriptions", force: true do |t|
+    t.integer  "quantity"
+    t.string   "unit"
+    t.integer  "hospitalization_id"
+    t.integer  "medicament_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "prescriptions", ["hospitalization_id"], name: "index_prescriptions_on_hospitalization_id"
+  add_index "prescriptions", ["medicament_id"], name: "index_prescriptions_on_medicament_id"
 
   create_table "procedures", force: true do |t|
     t.text     "description"
@@ -129,22 +135,6 @@ ActiveRecord::Schema.define(version: 20140501172530) do
   end
 
   add_index "procedures", ["medicalrecord_id"], name: "index_procedures_on_medicalrecord_id"
-
-  create_table "serum_applications", force: true do |t|
-    t.integer  "serum_id"
-    t.integer  "hospitalization_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "serum_applications", ["hospitalization_id"], name: "index_serum_applications_on_hospitalization_id"
-  add_index "serum_applications", ["serum_id"], name: "index_serum_applications_on_serum_id"
-
-  create_table "serums", force: true do |t|
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "special_cares", force: true do |t|
     t.text     "description"
