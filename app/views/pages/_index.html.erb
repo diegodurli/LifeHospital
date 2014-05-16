@@ -1,7 +1,7 @@
 <% if logged_user %>
-	<div class="row">
+	<div class="row application_menu">
 	  <div class="col-xs-12 col-md-4">
-	    <a href="#" class="thumbnail">
+	    <a href="<%= patients_path %>" class="thumbnail">
 		    <%= fa_stacked_icon "users", base: "square-o", class: 'squared_icons fa-4x' %>
 		    <div id='stacked_icon_text'>Patients</div>
 	    </a>
@@ -64,12 +64,6 @@
 	    <a href="<%= procedures_path %>" class="thumbnail">
 		    <%= fa_stacked_icon "plus-square", base: "square-o", class: 'squared_icons fa-4x' %>
 		    <div id='stacked_icon_text'>Procedures</div>
-	    </a>
-	  </div>
-	  <div class="col-xs-12 col-md-4">
-	    <a href="<%= serums_path %>" class="thumbnail">
-		    <%= fa_stacked_icon "flask", base: "square-o", class: 'squared_icons fa-4x' %>
-		    <div id='stacked_icon_text'>Serums</div>
 	    </a>
 	  </div>
 	  <div class="col-xs-12 col-md-4">

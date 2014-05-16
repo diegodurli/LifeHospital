@@ -5,7 +5,7 @@
     <%= f.text_field :status, class: 'form-control', placeholder: 'Status', required: true %>
 
     <div class="input-group">
-    	<%= f.text_field :medicalrecord_id, class: 'form-control', placeholder: 'Medical Record', disabled: false, required: true %>
+    	<%= f.text_field :medical_record_id, class: 'form-control', placeholder: 'Medical Record', disabled: false, required: true %>
   		<%= content_tag 'span', class: 'input-group-btn' do %>
     		<%= button_tag fa_icon('search'), id: 'modal_search_button', name: 'Medical Records', type: 'button', class: 'btn btn-default form-control' %>
     	<% end %>
