@@ -18,7 +18,7 @@ class ProceduresControllerTest < ActionController::TestCase
 
   test "should create procedure" do
     assert_difference('Procedure.count') do
-      post :create, procedure: { description: @procedure.description, medicalrecord_id: @procedure.medicalrecord_id, observations: @procedure.observations, scheduled: @procedure.scheduled }
+      post :create, procedure: { description: @procedure.description, medical_record_id: @procedure.medical_record_id, observations: @procedure.observations, scheduled: @procedure.scheduled }
     end
 
     assert_redirected_to procedure_path(assigns(:procedure))
@@ -35,7 +35,7 @@ class ProceduresControllerTest < ActionController::TestCase
   end
 
   test "should update procedure" do
-    patch :update, id: @procedure, procedure: { description: @procedure.description, medicalrecord_id: @procedure.medicalrecord_id, observations: @procedure.observations, scheduled: @procedure.scheduled }
+    patch :update, id: @procedure, procedure: { description: @procedure.description, medical_record_id: @procedure.medical_record_id, observations: @procedure.observations, scheduled: @procedure.scheduled }
     assert_redirected_to procedure_path(assigns(:procedure))
   end
 

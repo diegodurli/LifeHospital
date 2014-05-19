@@ -18,7 +18,7 @@ class HospitalizationsControllerTest < ActionController::TestCase
 
   test "should create hospitalization" do
     assert_difference('Hospitalization.count') do
-      post :create, hospitalization: { location: @hospitalization.location, medicalrecord_id: @hospitalization.medicalrecord_id, person_id: @hospitalization.person_id, procedures: @hospitalization.procedures, treatments: @hospitalization.treatments }
+      post :create, hospitalization: { location: @hospitalization.location, medical_record_id: @hospitalization.medical_record_id, person_id: @hospitalization.person_id, procedures: @hospitalization.procedures, treatments: @hospitalization.treatments }
     end
 
     assert_redirected_to hospitalization_path(assigns(:hospitalization))
@@ -35,7 +35,7 @@ class HospitalizationsControllerTest < ActionController::TestCase
   end
 
   test "should update hospitalization" do
-    patch :update, id: @hospitalization, hospitalization: { location: @hospitalization.location, medicalrecord_id: @hospitalization.medicalrecord_id, person_id: @hospitalization.person_id, procedures: @hospitalization.procedures, treatments: @hospitalization.treatments }
+    patch :update, id: @hospitalization, hospitalization: { location: @hospitalization.location, medical_record_id: @hospitalization.medical_record_id, person_id: @hospitalization.person_id, procedures: @hospitalization.procedures, treatments: @hospitalization.treatments }
     assert_redirected_to hospitalization_path(assigns(:hospitalization))
   end
 

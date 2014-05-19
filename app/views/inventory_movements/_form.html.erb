@@ -1,7 +1,8 @@
 <%= form_for @record, html: get_default_form_html_options(@record), remote: true do |f| %>
   <div>
     <%= f.text_field :inventory_id, class: 'form-control', placeholder: 'Inventory', autofocus: true, required: true %>
-    <%= f.text_field :medicament_id, class: 'form-control', placeholder: 'Medicament', required: true %>
+    <%= f.text_field :source, class: 'form-control', placeholder: 'Source', required: true %>
+    <%= f.text_field :source_id, class: 'form-control', placeholder: 'Source ID', required: true %>
     <%= f.number_field :quantity, class: 'form-control', placeholder: 'Quantity', required: true %>
     <%= f.text_field :unit_value, class: 'form-control', placeholder: 'Unit Value', required: true %>
     <%= f.text_field :total_value, class: 'form-control', placeholder: 'Total Value', required: true %>

@@ -31,6 +31,6 @@ class ClinicalOutcomesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def clinical_outcome_params
-      params.require(:clinical_outcome).permit(:description, :observations, :status, :medicalrecord_id)
+      params.require(:clinical_outcome).permit(:description, :observations, :status, :medical_record_id)
     end
 end

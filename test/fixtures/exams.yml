@@ -5,11 +5,11 @@ one:
   observations: MyText
   archive: MyText
   scheduled: false
-  medicalrecord_id: 
+  medical_record_id: 
 
 two:
   description: MyText
   observations: MyText
   archive: MyText
   scheduled: false
-  medicalrecord_id: 
+  medical_record_id: 

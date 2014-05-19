@@ -7,7 +7,7 @@
 
 <div class="row">
   <div class="col-xs-2 col-sm-2 col-md-2">
-    <%= link_to fa_icon('plus 2x'), send("new_#{name_singular}_path"), class: "btn btn-right", role: 'button', remote: true %>
+    <%= link_to fa_icon('plus 2x'), send("new_#{name_singular}_path"), class: "btn btn-right", role: 'button', remote: true unless canAdd?(title) %>
   </div>
   <div class="col-xs-10 col-sm-10 col-md-10">
     <h1><%= title %></h1>
@@ -21,12 +21,11 @@
         <thead>
           <tr>
             <% columns.each do |column| %>
-              <th><%= column.humanize %></th>
+              <th><%= column.gsub('_',' ').titleize %></th>
             <% end %>
             <th></th>
           </tr>
         </thead>
-
         <tbody>
           <% records.each do |record| %>
             <tr>
@@ -34,8 +33,8 @@
                 <td><%= record[column] %></td>
               <% end %>
               <td class='icons-cell'>
-                <%= link_to fa_icon('edit 2x'), send("edit_#{name_singular}_path", record), remote: true %>
-                <%= link_to fa_icon('trash-o 2x'), record, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
+                <%= link_to fa_icon('edit 2x'), send("edit_#{name_singular}_path", record), remote: true unless canEdit?(title) %>
+                <%= link_to fa_icon('trash-o 2x'), record, method: :delete, remote: true, data: { confirm: 'Are you sure?' } unless canDelete?(title) %>
               </td>
             </tr>
           <% end %>

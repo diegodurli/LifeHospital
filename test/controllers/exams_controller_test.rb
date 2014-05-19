@@ -18,7 +18,7 @@ class ExamsControllerTest < ActionController::TestCase
 
   test "should create exam" do
     assert_difference('Exam.count') do
-      post :create, exam: { archive: @exam.archive, description: @exam.description, medicalrecord_id: @exam.medicalrecord_id, observations: @exam.observations, scheduled: @exam.scheduled }
+      post :create, exam: { archive: @exam.archive, description: @exam.description, medical_record_id: @exam.medical_record_id, observations: @exam.observations, scheduled: @exam.scheduled }
     end
 
     assert_redirected_to exam_path(assigns(:exam))
@@ -35,7 +35,7 @@ class ExamsControllerTest < ActionController::TestCase
   end
 
   test "should update exam" do
-    patch :update, id: @exam, exam: { archive: @exam.archive, description: @exam.description, medicalrecord_id: @exam.medicalrecord_id, observations: @exam.observations, scheduled: @exam.scheduled }
+    patch :update, id: @exam, exam: { archive: @exam.archive, description: @exam.description, medical_record_id: @exam.medical_record_id, observations: @exam.observations, scheduled: @exam.scheduled }
     assert_redirected_to exam_path(assigns(:exam))
   end
 

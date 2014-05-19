@@ -4,10 +4,10 @@ one:
   description: MyText
   observations: MyText
   status: MyString
-  medicalrecord_id: 
+  medical_record_id: 
 
 two:
   description: MyText
   observations: MyText
   status: MyString
-  medicalrecord_id: 
+  medical_record_id: 

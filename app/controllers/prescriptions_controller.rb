@@ -17,6 +17,16 @@ class PrescriptionsController < ApplicationController
 
   def create
     super
+
+    if not @record.errors.any?
+      @record.medicaments.each do |medicament|
+        createInventoryMovement(medicament,'OUT',medicament.quantity)
+
+        if @inventory.total_value <= medicament.inventory_min
+          createInventoryMovement(medicament,'IN',medicament.quantity)
+        end
+      end
+    end
   end
 
   def update
@@ -31,6 +41,6 @@ class PrescriptionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def prescription_params
-      params.require(:prescription).permit(:quantity, :unit, :hospitalization_id, :medicament_id)
+      params.require(:prescription).permit(:quantity, :unit, :observation, :hospitalization_id)
     end
 end

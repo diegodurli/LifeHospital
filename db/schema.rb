@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140515062937) do
+ActiveRecord::Schema.define(version: 20140517063821) do
 
   create_table "clinical_outcomes", force: true do |t|
     t.text     "description"
@@ -60,25 +60,27 @@ ActiveRecord::Schema.define(version: 20140515062937) do
   add_index "hospitalizations", ["patient_id"], name: "index_hospitalizations_on_patient_id"
 
   create_table "inventories", force: true do |t|
-    t.decimal  "total_value"
-    t.string   "document"
+    t.decimal  "total_value", default: 0.0, null: false
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "inventory_movements", force: true do |t|
     t.integer  "inventory_id"
-    t.integer  "medicament_id"
-    t.integer  "quantity"
-    t.decimal  "unit_value"
-    t.decimal  "total_value"
+    t.integer  "quantity",      default: 0,   null: false
+    t.decimal  "unit_value",    default: 0.0, null: false
+    t.decimal  "total_value",   default: 0.0, null: false
     t.string   "movement_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "source"
+    t.integer  "source_id"
   end
 
   add_index "inventory_movements", ["inventory_id"], name: "index_inventory_movements_on_inventory_id"
-  add_index "inventory_movements", ["medicament_id"], name: "index_inventory_movements_on_medicament_id"
+  add_index "inventory_movements", ["source"], name: "index_inventory_movements_on_source"
+  add_index "inventory_movements", ["source_id"], name: "index_inventory_movements_on_source_id"
 
   create_table "medical_records", force: true do |t|
     t.text     "description"
@@ -90,14 +92,24 @@ ActiveRecord::Schema.define(version: 20140515062937) do
 
   add_index "medical_records", ["hospitalization_id"], name: "index_medical_records_on_hospitalization_id"
 
+  create_table "medicament_prescriptions", force: true do |t|
+    t.integer  "medicament_id"
+    t.integer  "prescription_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "medicament_prescriptions", ["medicament_id"], name: "index_medicament_prescriptions_on_medicament_id"
+  add_index "medicament_prescriptions", ["prescription_id"], name: "index_medicament_prescriptions_on_prescription_id"
+
   create_table "medicaments", force: true do |t|
     t.text     "description"
-    t.decimal  "dosage"
-    t.integer  "inventory_min"
+    t.decimal  "dosage",            default: 0.0, null: false
+    t.integer  "inventory_min",     default: 0,   null: false
     t.integer  "medical_record_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "quantity"
+    t.integer  "quantity",          default: 0,   null: false
   end
 
   add_index "medicaments", ["medical_record_id"], name: "index_medicaments_on_medical_record_id"
@@ -114,16 +126,15 @@ ActiveRecord::Schema.define(version: 20140515062937) do
   end
 
   create_table "prescriptions", force: true do |t|
-    t.integer  "quantity"
+    t.integer  "quantity",           default: 0, null: false
     t.string   "unit"
     t.integer  "hospitalization_id"
-    t.integer  "medicament_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "observation"
   end
 
   add_index "prescriptions", ["hospitalization_id"], name: "index_prescriptions_on_hospitalization_id"
-  add_index "prescriptions", ["medicament_id"], name: "index_prescriptions_on_medicament_id"
 
   create_table "procedures", force: true do |t|
     t.text     "description"

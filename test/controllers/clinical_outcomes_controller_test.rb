@@ -18,7 +18,7 @@ class ClinicalOutcomesControllerTest < ActionController::TestCase
 
   test "should create clinical_outcome" do
     assert_difference('ClinicalOutcome.count') do
-      post :create, clinical_outcome: { description: @clinical_outcome.description, medicalrecord_id: @clinical_outcome.medicalrecord_id, observations: @clinical_outcome.observations, status: @clinical_outcome.status }
+      post :create, clinical_outcome: { description: @clinical_outcome.description, medical_record_id: @clinical_outcome.medical_record_id, observations: @clinical_outcome.observations, status: @clinical_outcome.status }
     end
 
     assert_redirected_to clinical_outcome_path(assigns(:clinical_outcome))
@@ -35,7 +35,7 @@ class ClinicalOutcomesControllerTest < ActionController::TestCase
   end
 
   test "should update clinical_outcome" do
-    patch :update, id: @clinical_outcome, clinical_outcome: { description: @clinical_outcome.description, medicalrecord_id: @clinical_outcome.medicalrecord_id, observations: @clinical_outcome.observations, status: @clinical_outcome.status }
+    patch :update, id: @clinical_outcome, clinical_outcome: { description: @clinical_outcome.description, medical_record_id: @clinical_outcome.medical_record_id, observations: @clinical_outcome.observations, status: @clinical_outcome.status }
     assert_redirected_to clinical_outcome_path(assigns(:clinical_outcome))
   end
 

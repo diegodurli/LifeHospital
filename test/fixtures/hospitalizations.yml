@@ -5,11 +5,11 @@ one:
   procedures: MyString
   treatments: MyString
   person_id: 
-  medicalrecord_id: 
+  medical_record_id: 
 
 two:
   location: MyString
   procedures: MyString
   treatments: MyString
   person_id: 
-  medicalrecord_id: 
+  medical_record_id: 

@@ -58,6 +58,31 @@ class ApplicationController < ActionController::Base
   end
 
   private
+    def canAdd?(resource)
+      ['Inventories','Inventory Movements'].include?(resource)
+    end
+
+    def canEdit?(resource)
+      ['Inventory Movements'].include?(resource)
+    end
+
+    def canDelete?(resource)
+      ['Inventories','Inventory Movements'].include?(resource)
+    end
+
+    def createInventoryMovement(record,movement_type,quantity)
+      @inventory = Inventory.find_or_create_by(description: "Inventory #{Inventory.count}")
+      @inventory.inventory_movement.create(source: record.class.to_s, source_id: record.id, movement_type: movement_type, quantity: quantity, unit_value: quantity, total_value: quantity)
+
+      if movement_type == 'IN'
+        @inventory.total_value += quantity
+      else
+        @inventory.total_value -= quantity
+      end
+
+      @inventory.save
+    end
+
     def set_model
       @model = self.controller_name.classify.constantize
       @table_name = @model.table_name.singularize
@@ -142,5 +167,5 @@ class ApplicationController < ActionController::Base
       current_user().gravatar_url
     end
 
-    helper_method :current_user, :notification, :get_error_classes, :get_columns_of, :get_default_form_html_options, :gravatar_url, :logged_user, :find_records_from_string
+    helper_method :current_user, :notification, :get_error_classes, :get_columns_of, :get_default_form_html_options, :gravatar_url, :logged_user, :find_records_from_string, :canDelete?, :canEdit?, :canAdd?
 end

@@ -1,9 +1,8 @@
 <%= form_for @record, html: get_default_form_html_options(@record), remote: true do |f| %>
   <div>
-    <%= f.number_field :quantity, class: 'form-control', placeholder: 'Quantity', autofocus: true, required: true %>
+    <%= f.text_area :observation, class: 'form-control', placeholder: 'Observations', autofocus: true, required: true %>
+    <%= f.number_field :quantity, class: 'form-control', placeholder: 'Quantity', required: true %>
     <%= f.text_field :unit, class: 'form-control', placeholder: 'Unit', required: true %>
-    <%= f.text_field :diet, class: 'form-control', placeholder: 'Diet', required: true %>
-    <%= f.text_field :calories, class: 'form-control', placeholder: 'Calories', required: true %>
   </div>
   <div>
     <%= f.submit action, class: 'btn btn-lg btn-primary btn-block' %>
