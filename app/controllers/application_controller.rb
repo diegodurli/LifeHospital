@@ -18,7 +18,12 @@ class ApplicationController < ActionController::Base
   respond_to :html, :json, :js
 
   def index
-    render partial: 'partials/index', locals: {records: find_records}, layout: 'layouts/application'
+    respond_to do |format|
+      format.html { render partial: 'partials/index', locals: {records: find_records}, layout: 'layouts/application' }
+      format.json do
+        render json: find_records().to_json
+      end
+    end
   end
 
   def new
@@ -54,7 +59,12 @@ class ApplicationController < ActionController::Base
   end
 
   def get_records
-    render partial: 'partials/show_records', locals: {resource: params[:name]}
+    respond_to do |format|
+      format.js { render partial: 'partials/show_records', locals: {resource: params[:name]} }
+      format.json do
+        render json: find_records_from_string(params[:name]).to_json
+      end
+    end
   end
 
   private
@@ -71,7 +81,7 @@ class ApplicationController < ActionController::Base
     end
 
     def createInventoryMovement(record,movement_type,quantity)
-      @inventory = Inventory.find_or_create_by(description: "Inventory #{Inventory.count}")
+      @inventory = Inventory.find_or_create_by(description: "Inventory for #{record.description}")
       @inventory.inventory_movement.create(source: record.class.to_s, source_id: record.id, movement_type: movement_type, quantity: quantity, unit_value: quantity, total_value: quantity)
 
       if movement_type == 'IN'
@@ -98,7 +108,7 @@ class ApplicationController < ActionController::Base
     end
 
     def find_records_from_string(model)
-      model.sub(' ','').classify.safe_constantize.all
+      model.sub(' ','').classify.safe_constantize.order(:id)
     end
 
     def index_response(action)

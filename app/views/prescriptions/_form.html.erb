@@ -3,6 +3,8 @@
     <%= f.text_area :observation, class: 'form-control', placeholder: 'Observations', autofocus: true, required: true %>
     <%= f.number_field :quantity, class: 'form-control', placeholder: 'Quantity', required: true %>
     <%= f.text_field :unit, class: 'form-control', placeholder: 'Unit', required: true %>
+    <%= f.text_field :hospitalization_id, class: 'form-control', placeholder: 'Hospitalization', required: true %>
+    <%= text_field_tag :medicaments, nil, class: 'form-control', id: 'tokenfield-typeahead', placeholder: 'Type in a Medicament...' %>
   </div>
   <div>
     <%= f.submit action, class: 'btn btn-lg btn-primary btn-block' %>

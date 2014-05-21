@@ -15,6 +15,7 @@ gem 'roadie'
 gem 'gritter'
 gem 'font-awesome-rails'
 gem 'bcrypt', '~> 3.1.7'
+gem 'underscore-rails'
 
 group :doc do
   gem 'sdoc', require: false

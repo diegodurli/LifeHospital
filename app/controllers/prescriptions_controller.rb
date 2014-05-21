@@ -19,11 +19,17 @@ class PrescriptionsController < ApplicationController
     super
 
     if not @record.errors.any?
-      @record.medicaments.each do |medicament|
-        createInventoryMovement(medicament,'OUT',medicament.quantity)
+      if params[:medicaments]
+        params[:medicaments].split('|').each do |medicament|
+          @record.medicaments << Medicament.find_by(description: medicament)
+        end
 
-        if @inventory.total_value <= medicament.inventory_min
-          createInventoryMovement(medicament,'IN',medicament.quantity)
+        @record.medicaments.each do |medicament|
+          createInventoryMovement(medicament, 'OUT', @record.quantity)
+
+          if @inventory.total_value <= medicament.inventory_min
+            createInventoryMovement(medicament, 'IN', 10)
+          end
         end
       end
     end
@@ -31,16 +37,20 @@ class PrescriptionsController < ApplicationController
 
   def update
     super
+
+    # We need to develop the Update of the Inventory/Medicament quantity!
   end
 
   def destroy
     super
+
+    # We need to develop the Update of the Inventory/Medicament quantity!
   end
 
   private
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def prescription_params
-      params.require(:prescription).permit(:quantity, :unit, :observation, :hospitalization_id)
+      params.require(:prescription).permit(:quantity, :unit, :observation, :hospitalization_id, :medicaments)
     end
 end
