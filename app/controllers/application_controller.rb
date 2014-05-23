@@ -162,7 +162,13 @@ class ApplicationController < ActionController::Base
     end
 
     def get_default_form_html_options(resource)
-      {class: "form-signin #{get_error_classes(resource && resource.errors.any?)}", role: 'form'}
+      options = {class: "form-signin #{get_error_classes(resource && resource.errors.any?)}", role: 'form', new_record: resource.new_record?, resource: resource.class.to_s.pluralize.downcase, resource_id: resource.id}
+    
+      if resource.class == Prescription
+        options = options.merge(linked_resource: 'medicaments')
+      end
+
+      options
     end
 
     def is_using_modal?(value)

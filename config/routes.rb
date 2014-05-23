@@ -15,6 +15,8 @@ LifeHospital::Application.routes.draw do
   resources :clinical_outcomes
   resources :diets
   resources :prescriptions
+  get 'prescriptions/:id/medicaments', to: "prescriptions#get_medicaments"
+
   resources :special_cares
 
   resources :medical_records

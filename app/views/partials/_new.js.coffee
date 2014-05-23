@@ -3,17 +3,11 @@ isTokenValid = (allowedTokens, currentTokens, tokenCreated) ->
 	tokenAllowed 		  = _.find allowedTokens, (token) -> token.value == tokenCreated.attrs.value
 	(tokenAlreadyExist == undefined) && (tokenAllowed != undefined)
 
-$('#modal-notifications').html "<%= j render 'partials/notifications' %>"
-$('#formModalContent').html "<%= j render 'form', action: 'Create' %>"
-$('#formModal').modal 'show'
+getTokenfieldsFor = (action) ->
+	url = "/#{$('form').attr('linked_resource')}"
 
-$('#modal_search_button').on 'click', (e) ->
-	$.get '/get_records', {name: this.name}
-
-$('#formModal').on 'shown.bs.modal', (e) ->
-	$('#special_care_desactivation_date .input-group.date').datepicker(format: "yyyy-mm-dd", todayBtn: "linked")
-
-	$.getJSON '/medicaments', (json) ->
+	$.ajaxSetup { async:false }
+	$.getJSON url, (json) ->
 		locals = json
 		engine = new Bloodhound {
 		  local: locals,
@@ -36,4 +30,16 @@ $('#formModal').on 'shown.bs.modal', (e) ->
 		).on('tokenfield:removedtoken', (e) ->
 		).tokenfield()
 
-		$('.tokenfield').attr('required','required');
+		$('.tokenfield').attr 'required','required'
+
+$('#modal-notifications').html "<%= j render 'partials/notifications' %>"
+$('#formModalContent').html "<%= j render 'form', action: 'Create' %>"
+$('#formModal').modal 'show'
+
+$('#modal_search_button').on 'click', (e) ->
+	$.get '/get_records', {name: this.name}
+
+$('#formModal').on 'shown.bs.modal', (e) ->
+	$('#special_care_desactivation_date .input-group.date').datepicker(format: "yyyy-mm-dd", todayBtn: "linked")
+
+	getTokenfieldsFor('new')

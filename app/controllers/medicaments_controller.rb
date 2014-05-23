@@ -31,6 +31,11 @@ class MedicamentsController < ApplicationController
   def destroy
     super
     updateInventoryQuantity(@record)
+
+    @inventory = Inventory.find_by(description: "Inventory for #{@record.description}")
+    if @inventory
+      @inventory.delete
+    end
   end
 
   private
