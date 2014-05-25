@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
 
   def get_records
     respond_to do |format|
-      format.js { render partial: 'partials/show_records', locals: {resource: params[:name]} }
+      format.js { render partial: 'partials/show_records', locals: {resource: params[:name], class_to: params[:class_to]} }
       format.json do
         render json: find_records_from_string(params[:name]).to_json
       end

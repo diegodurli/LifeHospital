@@ -8,7 +8,7 @@
         Scheduled?
       </label>
     </div>
-    <%= f.text_field :medical_record_id, class: 'form-control', placeholder: 'Medical Record', required: true %>
+    <%= render partial: 'partials/search_button', locals: {form: f, column: :medical_record_id, placeholder: 'Medical Record', search_for: 'Medical Records', class_to: 'modal_search_button'} %>
   </div>
   <div>
     <%= f.submit action, class: 'btn btn-lg btn-primary btn-block' %>

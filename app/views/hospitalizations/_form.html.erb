@@ -3,8 +3,8 @@
     <%= f.text_field :location, class: 'form-control', placeholder: 'Location', autofocus: true, required: true %>
     <%= f.text_field :procedures, class: 'form-control', placeholder: 'Procedures', required: true %>
     <%= f.text_field :treatments, class: 'form-control', placeholder: 'Treatments', required: true %>
-    <%= f.text_field :user_id, class: 'form-control', placeholder: 'User', required: true %>
-    <%= f.text_field :medical_record_id, class: 'form-control', placeholder: 'Medical Record', required: true %>
+    <%= render partial: 'partials/search_button', locals: {form: f, column: :patient_id, placeholder: 'Patient', search_for: 'Patients', class_to: 'modal_search_button'} %>
+    <%= render partial: 'partials/search_button', locals: {form: f, column: :medical_record_id, placeholder: 'Medical Record', search_for: 'Medical Records', class_to: 'modal_search_button2'} %>
   </div>
   <div>
     <%= f.submit action, class: 'btn btn-lg btn-primary btn-block' %>

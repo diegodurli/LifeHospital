@@ -41,10 +41,16 @@ $('#modal-notifications').html "<%= j render 'partials/notifications' %>"
 $('#formModalContent').html "<%= j render 'form', action: 'Update' %>"
 $('#formModal').modal 'show'
 
-$('#modal_search_button').on 'click', (e) ->
-	$.get '/get_records', {name: this.name}
+$('.modal_search_button, .modal_search_button2').on 'click', (e) ->
+	$.get '/get_records', {name: this.name, class_to: $(this).attr('class_to')}
 
 $('#formModal').on 'shown.bs.modal', (e) ->
-	$('#special_care_desactivation_date .input-group.date').datepicker(format: "yyyy-mm-dd", todayBtn: "linked")
+	$('#special_care_desactivation_date .input-group.date').datepicker {
+		format: "yyyy-mm-dd",
+		todayBtn: "linked",
+		autoclose: true,
+		todayHighlight: true
+	}
 
-	getTokenfieldsFor('edit')
+	if $('form').attr('linked_resource') != undefined
+		getTokenfieldsFor('edit')

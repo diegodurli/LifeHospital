@@ -1,0 +1,6 @@
+<div class="input-group">
+	<%= form.text_field column, class: 'form-control', placeholder: placeholder, required: true %>
+	<%= content_tag 'span', class: 'input-group-btn' do %>
+		<%= button_tag fa_icon('search'), name: search_for, type: 'button', class: "btn btn-default form-control #{class_to}", class_to: class_to %>
+	<% end %>
+</div>

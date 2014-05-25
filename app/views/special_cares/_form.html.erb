@@ -1,13 +1,12 @@
 <%= form_for @record, html: get_default_form_html_options(@record), remote: true do |f| %>
   <div>
     <%= f.text_area :description, class: 'form-control', placeholder: 'Description', autofocus: true, required: true %>
-    <%#= f.date_select :desactivation, class: 'form-control', placeholder: 'Desactivation', required: true %>
 		<div id="special_care_desactivation_date">
 			<div class="input-group date">
     		<%= f.text_field :desactivation, class: 'form-control', placeholder: 'Desactivation', required: true %><span class="input-group-addon"><%= fa_icon 'calendar' %></span>
 			</div>
 		</div>
-    <%= f.text_field :hospitalization_id, class: 'form-control', placeholder: 'Hospitalization', required: true %>
+    <%= render partial: 'partials/search_button', locals: {form: f, column: :hospitalization_id, placeholder: 'Hospitalization', search_for: 'Hospitalizations', class_to: 'modal_search_button'} %>
   </div>
   <div>
     <%= f.submit action, class: 'btn btn-lg btn-primary btn-block' %>
