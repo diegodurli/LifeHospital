@@ -1,10 +1,9 @@
-class CreateSpecialCares < ActiveRecord::Migration
+class CreateTableDiet < ActiveRecord::Migration
   def change
-    create_table :special_cares do |t|
+    create_table :diets do |t|
       t.text :description
-      t.date :desactivation
       t.references :hospitalization, index: true
-
+      t.float :calories
       t.timestamps
     end
   end

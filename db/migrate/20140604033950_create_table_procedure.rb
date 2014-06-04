@@ -1,11 +1,10 @@
-class CreateProcedures < ActiveRecord::Migration
+class CreateTableProcedure < ActiveRecord::Migration
   def change
     create_table :procedures do |t|
       t.text :description
       t.text :observations
       t.boolean :scheduled
-      t.references :medicalrecord, index: true
-
+      t.references :medical_record, index: true
       t.timestamps
     end
   end

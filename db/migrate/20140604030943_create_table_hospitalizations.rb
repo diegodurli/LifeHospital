@@ -1,12 +1,11 @@
-class CreateHospitalizations < ActiveRecord::Migration
+class CreateTableHospitalizations < ActiveRecord::Migration
   def change
     create_table :hospitalizations do |t|
       t.text :location
       t.text :procedures
       t.text :treatments
-      t.references :person, index: true
-      t.references :medicalrecord, index: true
-
+      t.references :patient, index: true
+      t.references :medical_record, index: true
       t.timestamps
     end
   end

@@ -1,4 +1,4 @@
-class CreateUsers < ActiveRecord::Migration
+class CreateTableUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
       t.string :email
@@ -8,9 +8,10 @@ class CreateUsers < ActiveRecord::Migration
       t.string :phone
       t.string :address
       t.string :contact
-      t.string :type
-
+      t.string :user_type
       t.timestamps
     end
+
+    add_index :users, :email
   end
 end
