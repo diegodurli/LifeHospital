@@ -3,6 +3,7 @@
 
 <%= render partial: 'partials/modal', locals: {id: 'formModal', title: title, size: 'modal-sm'} %>
 <%= render partial: 'partials/modal', locals: {id: 'searchModal', title: '', size: 'modal-lg'} %>
+<%= render partial: 'partials/modal', locals: {id: 'listingModal', title: '', size: 'modal-lg'} %>
 <% columns = get_columns_of(records) %>
 
 <div class="row">
@@ -33,6 +34,7 @@
                 <td><%= record[column] %></td>
               <% end %>
               <td class='icons-cell'>
+                <%= link_to fa_icon('folder-open 2x'), '#', remote: true unless not list_records_for?(record) %>
                 <%= link_to fa_icon('edit 2x'), send("edit_#{name_singular}_path", record), remote: true unless canEdit?(title) %>
                 <%= link_to fa_icon('trash-o 2x'), record, method: :delete, remote: true, data: { confirm: 'Are you sure?' } unless canDelete?(title) %>
               </td>

@@ -183,5 +183,9 @@ class ApplicationController < ActionController::Base
       current_user().gravatar_url
     end
 
-    helper_method :current_user, :notification, :get_error_classes, :get_columns_of, :get_default_form_html_options, :gravatar_url, :logged_user, :find_records_from_string, :canDelete?, :canEdit?, :canAdd?
+    def list_records_for?(record)
+      ['Patient'].include?(record.class.to_s)
+    end
+
+    helper_method :current_user, :notification, :get_error_classes, :get_columns_of, :get_default_form_html_options, :gravatar_url, :logged_user, :find_records_from_string, :canDelete?, :canEdit?, :canAdd?, :list_records_for?
 end
