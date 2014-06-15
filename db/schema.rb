@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140604034133) do
+ActiveRecord::Schema.define(version: 20140609035422) do
 
   create_table "clinical_outcomes", force: true do |t|
     t.text     "description"
@@ -51,12 +51,10 @@ ActiveRecord::Schema.define(version: 20140604034133) do
     t.text     "procedures"
     t.text     "treatments"
     t.integer  "patient_id"
-    t.integer  "medical_record_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "hospitalizations", ["medical_record_id"], name: "index_hospitalizations_on_medical_record_id"
   add_index "hospitalizations", ["patient_id"], name: "index_hospitalizations_on_patient_id"
 
   create_table "inventories", force: true do |t|
@@ -85,12 +83,12 @@ ActiveRecord::Schema.define(version: 20140604034133) do
   create_table "medical_records", force: true do |t|
     t.text     "description"
     t.text     "historic"
-    t.integer  "hospitalization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "patient_id"
   end
 
-  add_index "medical_records", ["hospitalization_id"], name: "index_medical_records_on_hospitalization_id"
+  add_index "medical_records", ["patient_id"], name: "index_medical_records_on_patient_id"
 
   create_table "medicament_prescriptions", force: true do |t|
     t.integer  "medicament_id"

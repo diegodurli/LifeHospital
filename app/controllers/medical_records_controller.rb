@@ -31,6 +31,6 @@ class MedicalRecordsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def medical_record_params
-      params.require(:medical_record).permit(:description, :historic, :hospitalization_id)
+      params.require(:medical_record).permit(:description, :historic, :patient_id)
     end
 end

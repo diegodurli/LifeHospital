@@ -6,6 +6,7 @@ LifeHospital::Application.routes.draw do
   get "/logout", to: "sessions#destroy"
 
   get '/get_records', to: "application#get_records"
+  get '/get_details_for', to: "application#get_details_for"
 
   get '/signup', to: 'users#new'
   resources :users

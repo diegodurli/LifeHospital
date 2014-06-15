@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :authenticate, only: [:index, :show, :edit, :update, :destroy]
 
-  before_action :set_model, except: [:get_records]
+  before_action :set_model, except: [:get_records, :get_details_for]
   before_action :find_record, only: [:show, :edit, :update, :destroy]
 
   before_action only: [:show, :destroy, :index] do
@@ -67,17 +67,69 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def get_details_for
+    patient = Patient.find(params[:patient_id])
+    render partial: 'partials/show_details_for', locals: {patient: patient}
+  end
+
   private
     def canAdd?(resource)
       ['Inventories','Inventory Movements'].include?(resource)
     end
 
     def canEdit?(resource)
-      ['Inventory Movements'].include?(resource)
+      ['Medical Records','Inventory Movements'].include?(resource)
     end
 
     def canDelete?(resource)
-      ['Inventories','Inventory Movements'].include?(resource)
+      ['Medical Records','Inventories','Inventory Movements'].include?(resource)
+    end
+
+    def list_records_for?(resource)
+      ['Patients'].include?(resource)
+    end
+
+    def get_details_for?(resource)
+      ['Medical Records'].include?(resource)
+    end
+
+    def get_details_for_patient(patient, resource)
+      case resource
+      when 'Hospitalizations'
+        patient.hospitalizations.to_a
+      when 'Clinical Outcomes'
+        patient.medical_records.first.clinical_outcomes.to_a
+      when 'Exams'
+        patient.medical_records.first.exams.to_a
+      when 'Medicaments'
+        patient.medical_records.first.medicaments.to_a
+      when 'Procedures'
+        patient.medical_records.first.procedures.to_a
+      when 'Diets'
+        diets = []
+        patient.hospitalizations.each do |hospitalization|
+          hospitalization.diet.each do |diet|
+            diets.push(diet)
+          end
+        end
+        diets
+      when 'Prescriptions'
+        prescriptions = []
+        patient.hospitalizations.each do |hospitalization|
+          hospitalization.prescription.each do |prescription|
+            prescriptions.push(prescription)
+          end
+        end
+        prescriptions
+      when 'Special Cares'
+        special_cares = []
+        patient.hospitalizations.each do |hospitalization|
+          hospitalization.special_care.each do |special_care|
+            special_cares.push(special_care)
+          end
+        end
+        special_cares
+      end
     end
 
     def createInventoryMovement(record,movement_type,quantity)
@@ -153,9 +205,9 @@ class ApplicationController < ActionController::Base
       redirect_to login_url unless logged_user
     end
 
-    def get_columns_of(resources)
-      if not resources.empty?
-        resources.first.attribute_names - %w{id created_at updated_at}
+    def get_columns_of(resource)
+      if resource && resource.singularize.gsub(' ','').safe_constantize
+        resource.singularize.gsub(' ','').safe_constantize.attribute_names - %w{id created_at updated_at}
       else
         []
       end
@@ -183,9 +235,5 @@ class ApplicationController < ActionController::Base
       current_user().gravatar_url
     end
 
-    def list_records_for?(record)
-      ['Patient'].include?(record.class.to_s)
-    end
-
-    helper_method :current_user, :notification, :get_error_classes, :get_columns_of, :get_default_form_html_options, :gravatar_url, :logged_user, :find_records_from_string, :canDelete?, :canEdit?, :canAdd?, :list_records_for?
+    helper_method :current_user, :notification, :get_error_classes, :get_columns_of, :get_default_form_html_options, :gravatar_url, :logged_user, :find_records_from_string, :canDelete?, :canEdit?, :canAdd?, :list_records_for?, :get_details_for?, :get_details_for_patient
 end

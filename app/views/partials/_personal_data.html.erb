@@ -1,0 +1,13 @@
+<div class="jumbotron">
+	<p>
+		<ul class="list-group">
+		  <li class="list-group-item">Patient <%= patient.name %></li>
+		  <li class="list-group-item"><%= patient.document %></li>
+		  <li class="list-group-item"><%= patient.email %></li>
+		  <li class="list-group-item"><%= patient.phone %></li>
+		  <li class="list-group-item"><%= patient.address %></li>
+		  <li class="list-group-item"><%= patient.contact %></li>
+		  <li class="list-group-item">Created <%= distance_of_time_in_words(patient.created_at.time, Time.now) %> ago</li>
+		</ul>		
+	</p>
+</div>

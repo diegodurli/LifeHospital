@@ -1,10 +1,11 @@
-<% title = records.table.name.titleize
+<% return unless records
+   title = records.table.name.titleize
    name_singular = records.table.name.singularize %>
 
 <%= render partial: 'partials/modal', locals: {id: 'formModal', title: title, size: 'modal-sm'} %>
 <%= render partial: 'partials/modal', locals: {id: 'searchModal', title: '', size: 'modal-lg'} %>
-<%= render partial: 'partials/modal', locals: {id: 'listingModal', title: '', size: 'modal-lg'} %>
-<% columns = get_columns_of(records) %>
+<%= render partial: 'partials/modal', locals: {id: 'listingModal', title: title, size: 'modal-lg'} %>
+<% columns = get_columns_of(title) %>
 
 <div class="row">
   <div class="col-xs-2 col-sm-2 col-md-2">
@@ -34,7 +35,8 @@
                 <td><%= record[column] %></td>
               <% end %>
               <td class='icons-cell'>
-                <%= link_to fa_icon('folder-open 2x'), '#', remote: true unless not list_records_for?(record) %>
+                <%= link_to fa_icon('bars 2x'), "/get_details_for?patient_id=#{record.patient_id}", remote: true unless not get_details_for?(title) %>
+                <%= link_to fa_icon('folder-open 2x'), medical_records_path unless not list_records_for?(title) %>
                 <%= link_to fa_icon('edit 2x'), send("edit_#{name_singular}_path", record), remote: true unless canEdit?(title) %>
                 <%= link_to fa_icon('trash-o 2x'), record, method: :delete, remote: true, data: { confirm: 'Are you sure?' } unless canDelete?(title) %>
               </td>

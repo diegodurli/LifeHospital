@@ -1,20 +1,20 @@
-<% records = find_records_from_string(resource)
+<% return unless records
    columns = get_columns_of(resource) %>
 
 <div class="row">
   <div class="col-md-12">
     <div class="table-responsive">
-      <table class="table table-condensed table-hover">
+      <table class="table table-hover table-condensed">
         <thead>
           <tr>
             <% columns.each do |column| %>
-              <th><%= column.humanize %></th>
+              <th><%= column.gsub('_',' ').titleize %></th>
             <% end %>
           </tr>
         </thead>
         <tbody>
           <% records.each do |record| %>
-            <tr id="<%= record.id %>">
+            <tr>
               <% columns.each do |column| %>
                 <td><%= record[column] %></td>
               <% end %>

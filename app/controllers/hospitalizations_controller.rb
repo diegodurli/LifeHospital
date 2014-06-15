@@ -31,6 +31,6 @@ class HospitalizationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hospitalization_params
-      params.require(:hospitalization).permit(:location, :procedures, :treatments, :patient_id, :medical_record_id)
+      params.require(:hospitalization).permit(:location, :procedures, :treatments, :patient_id)
     end
 end
