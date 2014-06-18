@@ -13,9 +13,10 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'roadie'
 gem 'gritter'
-gem 'font-awesome-rails'
+gem 'font-awesome-rails', '~> 4.1'
 gem 'bcrypt', '~> 3.1.7'
 gem 'underscore-rails'
+gem 'prawn'
 
 group :doc do
   gem 'sdoc', require: false

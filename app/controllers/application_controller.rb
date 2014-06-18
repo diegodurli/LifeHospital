@@ -23,6 +23,10 @@ class ApplicationController < ActionController::Base
       format.json do
         render json: find_records().to_json
       end
+      format.pdf do
+        pdf = ReportPdf.new(find_records)
+        send_data pdf.render, filename: "#{@model.table_name}_report.pdf", type: 'application/pdf'
+      end
     end
   end
 
@@ -83,6 +87,10 @@ class ApplicationController < ActionController::Base
 
     def canDelete?(resource)
       ['Medical Records','Inventories','Inventory Movements'].include?(resource)
+    end
+
+    def canGenerateReport?(resource)
+      [''].include?(resource)
     end
 
     def list_records_for?(resource)
@@ -235,5 +243,5 @@ class ApplicationController < ActionController::Base
       current_user().gravatar_url
     end
 
-    helper_method :current_user, :notification, :get_error_classes, :get_columns_of, :get_default_form_html_options, :gravatar_url, :logged_user, :find_records_from_string, :canDelete?, :canEdit?, :canAdd?, :list_records_for?, :get_details_for?, :get_details_for_patient
+    helper_method :current_user, :notification, :get_error_classes, :get_columns_of, :get_default_form_html_options, :gravatar_url, :logged_user, :find_records_from_string, :canDelete?, :canEdit?, :canAdd?, :list_records_for?, :get_details_for?, :get_details_for_patient, :canGenerateReport?
 end

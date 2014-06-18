@@ -1,5 +1,6 @@
 <% return unless records
    title = records.table.name.titleize
+   index_path_pdf = "#{records.table.name}.pdf"
    name_singular = records.table.name.singularize %>
 
 <%= render partial: 'partials/modal', locals: {id: 'formModal', title: title, size: 'modal-sm'} %>
@@ -11,8 +12,11 @@
   <div class="col-xs-2 col-sm-2 col-md-2">
     <%= link_to fa_icon('plus 2x'), send("new_#{name_singular}_path"), class: "btn btn-right", role: 'button', remote: true unless canAdd?(title) %>
   </div>
-  <div class="col-xs-10 col-sm-10 col-md-10">
+  <div class="col-xs-8 col-sm-8 col-md-8">
     <h1><%= title %></h1>
+  </div>
+  <div class="col-xs-2 col-sm-2 col-md-2">
+    <%= link_to fa_icon('file-pdf-o 2x'), "/#{index_path_pdf}", class: "btn btn-right", role: 'button' unless canGenerateReport?(title) %>
   </div>
 </div>
 <br>
