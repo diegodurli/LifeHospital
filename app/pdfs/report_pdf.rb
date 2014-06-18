@@ -40,7 +40,7 @@ class ReportPdf < Prawn::Document
 
     @records.each do |record|
       values = []
-      columns.each { |column| values.push(record[column.to_sym]) }
+      columns.each { |column| values.push(record[column.to_sym].to_s) }
       @values.push(values)
     end
 
