@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609035422) do
+ActiveRecord::Schema.define(version: 20140618165822) do
 
   create_table "clinical_outcomes", force: true do |t|
     t.text     "description"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20140609035422) do
   add_index "hospitalizations", ["patient_id"], name: "index_hospitalizations_on_patient_id"
 
   create_table "inventories", force: true do |t|
-    t.decimal  "total_value", default: 0.0, null: false
+    t.decimal  "total_value", default: -0.0, null: false
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -66,9 +66,9 @@ ActiveRecord::Schema.define(version: 20140609035422) do
 
   create_table "inventory_movements", force: true do |t|
     t.integer  "inventory_id"
-    t.integer  "quantity",      default: 0,   null: false
-    t.decimal  "unit_value",    default: 0.0, null: false
-    t.decimal  "total_value",   default: 0.0, null: false
+    t.integer  "quantity",      default: 0,    null: false
+    t.decimal  "unit_value",    default: -0.0, null: false
+    t.decimal  "total_value",   default: -0.0, null: false
     t.string   "movement_type"
     t.string   "source"
     t.integer  "source_id"
@@ -102,9 +102,9 @@ ActiveRecord::Schema.define(version: 20140609035422) do
 
   create_table "medicaments", force: true do |t|
     t.text     "description"
-    t.decimal  "dosage",            default: 0.0, null: false
-    t.integer  "inventory_min",     default: 0,   null: false
-    t.integer  "quantity",          default: 0,   null: false
+    t.decimal  "dosage",            null: false
+    t.integer  "inventory_min",     null: false
+    t.integer  "quantity",          null: false
     t.integer  "medical_record_id"
     t.datetime "created_at"
     t.datetime "updated_at"
