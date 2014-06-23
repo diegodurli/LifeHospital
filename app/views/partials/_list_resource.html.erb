@@ -40,7 +40,7 @@
               <% end %>
               <td class='icons-cell'>
                 <%= link_to fa_icon('bars 2x'), "/get_details_for?patient_id=#{record.patient_id}", remote: true unless not get_details_for?(title) %>
-                <%= link_to fa_icon('folder-open 2x'), medical_records_path unless not list_records_for?(title) %>
+                <%= link_to fa_icon('folder-open 2x'), "/medical_records?patient=#{record.id}" unless not list_records_for?(title) %>
                 <%= link_to fa_icon('edit 2x'), send("edit_#{name_singular}_path", record), remote: true unless canEdit?(title) %>
                 <%= link_to fa_icon('trash-o 2x'), record, method: :delete, remote: true, data: { confirm: 'Are you sure?' } unless canDelete?(title) %>
               </td>

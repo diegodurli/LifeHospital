@@ -109,10 +109,18 @@ class ApplicationController < ActionController::Base
         patient.medical_records.first.clinical_outcomes.to_a
       when 'Exams'
         patient.medical_records.first.exams.to_a
-      when 'Medicaments'
-        patient.medical_records.first.medicaments.to_a
       when 'Procedures'
         patient.medical_records.first.procedures.to_a
+      when 'Medicaments'
+        medicaments = []
+        patient.hospitalizations.each do |hospitalization|
+          hospitalization.prescription.each do |prescription|
+            prescription.medicaments.each do |medicament|
+              medicaments.push(medicament)
+            end
+          end
+        end
+        medicaments
       when 'Diets'
         diets = []
         patient.hospitalizations.each do |hospitalization|
@@ -164,7 +172,11 @@ class ApplicationController < ActionController::Base
     end
 
     def find_records
-      @model.order(:id)
+      if params[:patient]
+        @model.where(patient_id: params[:patient])
+      else
+        @model.order(:id)
+      end
     end
 
     def find_records_from_string(model)

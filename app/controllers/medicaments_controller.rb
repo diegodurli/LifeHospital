@@ -59,6 +59,6 @@ class MedicamentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def medicament_params
-      params.require(:medicament).permit(:description, :dosage, :quantity, :inventory_min, :medical_record_id)
+      params.require(:medicament).permit(:description, :dosage, :quantity, :inventory_min)
     end
 end
