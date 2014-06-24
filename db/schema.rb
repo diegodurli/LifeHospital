@@ -38,10 +38,10 @@ ActiveRecord::Schema.define(version: 20140623233308) do
     t.text     "description"
     t.text     "observations"
     t.text     "archive"
-    t.date     "schedule"
     t.integer  "medical_record_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "schedule"
   end
 
   add_index "exams", ["medical_record_id"], name: "index_exams_on_medical_record_id"
@@ -136,10 +136,10 @@ ActiveRecord::Schema.define(version: 20140623233308) do
   create_table "procedures", force: true do |t|
     t.text     "description"
     t.text     "observations"
-    t.date     "schedule"
     t.integer  "medical_record_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "schedule"
   end
 
   add_index "procedures", ["medical_record_id"], name: "index_procedures_on_medical_record_id"

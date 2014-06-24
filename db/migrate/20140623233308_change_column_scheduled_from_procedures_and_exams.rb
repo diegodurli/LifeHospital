@@ -1,9 +1,9 @@
 class ChangeColumnScheduledFromProceduresAndExams < ActiveRecord::Migration
   def change
-  	change_column :procedures, :scheduled, :date
-  	change_column :exams, :scheduled, :date
+  	add_column :procedures, :schedule, :date
+  	remove_column :procedures, :scheduled
 
-  	rename_column :procedures, :scheduled, :schedule
-  	rename_column :exams, :scheduled, :schedule
+  	add_column :exams, :schedule, :date
+  	remove_column :exams, :scheduled
   end
 end
